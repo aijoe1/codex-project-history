@@ -1,0 +1,13 @@
+.git/**
+.github/**
+.gitignore
+demo/**
+docs/**
+test/**
+AGENTS.md
+CLAUDE.md
+CONTRIBUTING.md
+DECISIONS.md
+HANDOFF-INDEX.md
+install-local.sh
+scripts/**

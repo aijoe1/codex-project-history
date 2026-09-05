@@ -20,4 +20,12 @@ This is the shared repository contract for Claude Code, Codex, and human contrib
 
 ## Project commands
 
-Document the exact install, development, test, lint, build, and live-smoke commands here once the stack is selected.
+- Install locally: `bash install-local.sh`, then run **Developer: Reload Window** in VS Code.
+- Automated tests: `npm test`
+- Syntax checks: `npm run check`
+- Shell checks: `bash -n install-local.sh demo/setup-fixture.sh`
+- Real local smoke test: `node scripts/smoke.js "$PWD"` (review output before sharing it)
+- Privacy-safe demo fixture: `bash demo/setup-fixture.sh`
+
+The extension's read-only boundary is an architecture constraint. Do not add a Codex database
+write path without a separate design, threat-model, and migration decision.
