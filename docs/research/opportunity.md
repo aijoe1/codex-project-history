@@ -1,8 +1,8 @@
 # Project-aware Codex chat history
 
-Status: BUILD
+Status: RELEASED
 First observed: 2026-09-02
-Last checked: 2026-09-03
+Last checked: 2026-09-06
 Score: 79/100
 
 ## Problem
@@ -62,4 +62,4 @@ category or standalone startup.
 | It handles the reproduced missing-WAL-sidecar failure. | Verified | Real macOS reproduction, regression test, and successful post-reload manual test. |
 | It supports Linux or Windows. | Removed | The first public-ready release is macOS-first. |
 | No other solution exists. | Removed | A competing extension and emerging native session UI exist. |
-| The repository and install URL are live. | Planned | Verify only after the public repository is approved and created. |
+| The repository and install URL are live. | Verified | Public repository and checksum-verified [v0.1.4 release](https://github.com/aijoe1/codex-project-history/releases/tag/v0.1.4), checked 2026-09-06. |
