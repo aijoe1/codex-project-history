@@ -2,6 +2,9 @@
 
 ## Open Questions
 
+- [ ] Update the demo setup to initialize a complete, isolated Codex schema before loading
+  synthetic rows; the minimal fixture causes the official app-server to fail initialization
+  (see the 2026-09-06 isolated activation report).
 - [ ] Choose whether to publish v0.1.4 only on GitHub first or also to the VS Code Marketplace.
 - [ ] After the first public release, add a pinned vendor receipt to the private dotfiles copy so
   cross-machine installs can verify which public release they contain.

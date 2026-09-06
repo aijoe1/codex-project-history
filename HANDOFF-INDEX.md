@@ -5,3 +5,5 @@ One chronological line per completed or paused agent session:
 `YYYY-MM-DD HH:MM | [claude|codex] | what changed | what remains / next step`
 
 2026-09-05 15:02 | [codex] | Rebuilt the unpublished release with synthetic demo/test IDs and SQLite/Git timeouts; 22 tests, real local read, generated fixture smoke, VSIX/source comparison, and secret scan passed | Public repository creation and fresh editor activation of this revision remain pending; brief synchronous pauses are still possible.
+
+2026-09-06 04:04 | [codex] | Isolated VSIX activation, status bar, keyboard shortcut, grouping, search, and actual window reload passed with an initialized synthetic database; recorded checksum and screenshots; normal installation unchanged | Bundled minimal demo schema fails official Codex initialization and needs a compatible fixture workflow before sharing; real-chat reopening and publication were not tested/performed. See docs/reviews/2026-09-06-isolated-activation.md.
