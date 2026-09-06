@@ -2,6 +2,8 @@
 
 ## 0.1.4 - 2026-09-03
 
+- Initialize the privacy-safe demo with the installed official Codex runtime instead of a minimal,
+  incompatible table, while isolating both Codex home directories from real user history.
 - Use synthetic demo/test chat IDs and bound SQLite/Git child processes with timeouts before publication.
 - Add a current-project-first Codex chat picker with repository, branch, age, and path context.
 - Reopen selected chats through the official Codex editor route.

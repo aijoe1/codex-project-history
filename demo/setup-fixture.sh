@@ -2,32 +2,118 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DEMO_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/codex-project-history-demo.XXXXXX")"
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "This demo currently supports macOS only." >&2
+  exit 1
+fi
+if [[ ! -x /usr/bin/sqlite3 ]]; then
+  echo "This demo requires /usr/bin/sqlite3." >&2
+  exit 1
+fi
+if ! command -v node >/dev/null 2>&1; then
+  echo "This demo requires Node.js." >&2
+  exit 1
+fi
+
+resolve_codex_binary() {
+  if [[ -n "${CODEX_PROJECT_HISTORY_CODEX_BIN:-}" ]]; then
+    if [[ ! -x "$CODEX_PROJECT_HISTORY_CODEX_BIN" ]]; then
+      echo "CODEX_PROJECT_HISTORY_CODEX_BIN is not executable: $CODEX_PROJECT_HISTORY_CODEX_BIN" >&2
+      return 1
+    fi
+    printf '%s\n' "$CODEX_PROJECT_HISTORY_CODEX_BIN"
+    return
+  fi
+
+  if ! command -v code >/dev/null 2>&1; then
+    echo "Could not find the VS Code 'code' command. Install it or set CODEX_PROJECT_HISTORY_CODEX_BIN." >&2
+    return 1
+  fi
+
+  local extension_dir architecture platform_dir candidate
+  extension_dir="$(code --locate-extension openai.chatgpt 2>/dev/null || true)"
+  if [[ -z "$extension_dir" ]]; then
+    echo "Could not locate the official OpenAI Codex extension (openai.chatgpt)." >&2
+    return 1
+  fi
+
+  architecture="$(uname -m)"
+  case "$architecture" in
+    arm64) platform_dir="macos-aarch64" ;;
+    x86_64) platform_dir="macos-x86_64" ;;
+    *)
+      echo "Unsupported macOS architecture for the demo: $architecture" >&2
+      return 1
+      ;;
+  esac
+  candidate="$extension_dir/bin/$platform_dir/codex"
+  if [[ ! -x "$candidate" ]]; then
+    echo "The official OpenAI extension does not contain the expected Codex binary: $candidate" >&2
+    return 1
+  fi
+  printf '%s\n' "$candidate"
+}
+
+CODEX_BIN="$(resolve_codex_binary)"
+
+if [[ -n "${CODEX_PROJECT_HISTORY_DEMO_ROOT:-}" ]]; then
+  DEMO_ROOT="$CODEX_PROJECT_HISTORY_DEMO_ROOT"
+  if [[ -e "$DEMO_ROOT" ]]; then
+    echo "CODEX_PROJECT_HISTORY_DEMO_ROOT must not already exist: $DEMO_ROOT" >&2
+    exit 1
+  fi
+  mkdir -p "$DEMO_ROOT"
+else
+  TEMP_BASE="${TMPDIR:-/tmp}"
+  DEMO_ROOT="$(mktemp -d "${TEMP_BASE%/}/codex-project-history-demo.XXXXXX")"
+fi
 WORKSPACE="$DEMO_ROOT/projects/acme-dashboard"
+STOREFRONT="$DEMO_ROOT/projects/storefront"
+CODEX_HOME_DIR="$DEMO_ROOT/codex-home"
 STATE_ROOT="$DEMO_ROOT/codex-state"
 
-mkdir -p "$WORKSPACE" "$STATE_ROOT"
+mkdir -p "$WORKSPACE" "$STOREFRONT" "$CODEX_HOME_DIR" "$STATE_ROOT"
 git -C "$WORKSPACE" init -q
 git -C "$WORKSPACE" remote add origin https://github.com/example/acme-dashboard.git
+git -C "$STOREFRONT" init -q
+git -C "$STOREFRONT" remote add origin https://github.com/example/storefront.git
 
-/usr/bin/sqlite3 "$STATE_ROOT/state_5.sqlite" <<SQL
-CREATE TABLE threads (
-  id TEXT, name TEXT, preview TEXT, title TEXT, cwd TEXT,
-  git_branch TEXT, git_origin_url TEXT, recency_at INTEGER,
-  updated_at INTEGER, archived INTEGER, source TEXT, thread_source TEXT
-);
-INSERT INTO threads VALUES
-  ('00000000-0000-4000-8000-000000000001', 'Fix the failing deploy', '', '', '$WORKSPACE', 'main', 'https://github.com/example/acme-dashboard.git', 1770000300, 1770000300, 0, 'vscode', 'user'),
-  ('00000000-0000-4000-8000-000000000002', 'Review authentication flow', '', '', '$WORKSPACE', 'feat/auth-review', 'https://github.com/example/acme-dashboard.git', 1770000200, 1770000200, 0, 'vscode', 'user'),
-  ('00000000-0000-4000-8000-000000000003', 'Fix the failing deploy', '', '', '$DEMO_ROOT/projects/storefront', 'release', 'https://github.com/example/storefront.git', 1770000100, 1770000100, 0, 'vscode', 'user');
+STATE_DATABASE="$(node "$REPO_ROOT/demo/initialize-state.cjs" "$CODEX_BIN" "$CODEX_HOME_DIR" "$STATE_ROOT")"
+
+sql_escape() {
+  printf '%s' "$1" | sed "s/'/''/g"
+}
+
+WORKSPACE_SQL="$(sql_escape "$WORKSPACE")"
+STOREFRONT_SQL="$(sql_escape "$STOREFRONT")"
+DEMO_ROOT_SQL="$(sql_escape "$DEMO_ROOT")"
+NOW="$(date +%s)"
+
+/usr/bin/sqlite3 "$STATE_DATABASE" <<SQL
+BEGIN IMMEDIATE;
+INSERT INTO threads (
+  id, rollout_path, created_at, updated_at, source, model_provider, cwd,
+  title, name, preview, sandbox_policy, approval_mode, has_user_event,
+  archived, git_branch, git_origin_url, recency_at, thread_source
+) VALUES
+  ('00000000-0000-4000-8000-000000000001', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000001.jsonl', $((NOW - 60)), $((NOW - 60)), 'vscode', 'openai', '$WORKSPACE_SQL', 'Fix the failing deploy', 'Fix the failing deploy', 'Fix the failing deploy', '{"type":"read-only"}', 'never', 1, 0, 'main', 'https://github.com/example/acme-dashboard.git', $((NOW - 60)), 'user'),
+  ('00000000-0000-4000-8000-000000000002', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000002.jsonl', $((NOW - 120)), $((NOW - 120)), 'vscode', 'openai', '$WORKSPACE_SQL', 'Review authentication flow', 'Review authentication flow', 'Review authentication flow', '{"type":"read-only"}', 'never', 1, 0, 'feat/auth-review', 'https://github.com/example/acme-dashboard.git', $((NOW - 120)), 'user'),
+  ('00000000-0000-4000-8000-000000000003', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000003.jsonl', $((NOW - 180)), $((NOW - 180)), 'vscode', 'openai', '$STOREFRONT_SQL', 'Fix the failing deploy', 'Fix the failing deploy', 'Fix the failing deploy', '{"type":"read-only"}', 'never', 1, 0, 'release', 'https://github.com/example/storefront.git', $((NOW - 180)), 'user');
+COMMIT;
 SQL
 
 cat <<OUT
 Privacy-safe demo fixture created at:
   $DEMO_ROOT
 
-Launch an Extension Development Host with:
-  CODEX_SQLITE_HOME="$STATE_ROOT" code --extensionDevelopmentPath="$REPO_ROOT" "$WORKSPACE"
+The official Codex runtime initialized the disposable state database:
+  $STATE_DATABASE
 
-Then press Control+Command+H. Delete the temporary demo directory when capture is complete.
+Launch an Extension Development Host with:
+OUT
+printf '  CODEX_HOME=%q CODEX_SQLITE_HOME=%q code --extensionDevelopmentPath=%q %q\n\n' \
+  "$CODEX_HOME_DIR" "$STATE_ROOT" "$REPO_ROOT" "$WORKSPACE"
+cat <<OUT
+Then press Control+Command+H. Do not open the synthetic chats; they have no transcripts.
+Delete the temporary demo directory when capture is complete.
 OUT

@@ -503,6 +503,84 @@ test("stalled Git lookup is terminated and directory grouping still works", () =
   assert.equal(groups[0].current, true);
 });
 
+test(
+  "demo setup initializes isolated state before inserting synthetic chats",
+  { skip: process.platform !== "darwin" || !fs.existsSync("/usr/bin/sqlite3") },
+  () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-demo-setup-test-"));
+    const fixtureRoot = path.join(root, "fixture");
+    const fakeCodex = path.join(root, "codex");
+    try {
+      fs.writeFileSync(fakeCodex, `#!/usr/bin/env node
+"use strict";
+const fs = require("node:fs");
+const path = require("node:path");
+const { execFileSync } = require("node:child_process");
+let input = "";
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk) => {
+  input += chunk;
+  const newline = input.indexOf("\\n");
+  if (newline < 0) return;
+  const request = JSON.parse(input.slice(0, newline));
+  const stateRoot = process.env.CODEX_SQLITE_HOME;
+  fs.mkdirSync(stateRoot, { recursive: true });
+  execFileSync("/usr/bin/sqlite3", [path.join(stateRoot, "state_5.sqlite"), \`
+    CREATE TABLE threads (
+      id TEXT PRIMARY KEY, rollout_path TEXT NOT NULL, created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL, source TEXT NOT NULL, model_provider TEXT NOT NULL,
+      cwd TEXT NOT NULL, title TEXT NOT NULL, name TEXT, preview TEXT NOT NULL DEFAULT '',
+      sandbox_policy TEXT NOT NULL, approval_mode TEXT NOT NULL,
+      has_user_event INTEGER NOT NULL DEFAULT 0, archived INTEGER NOT NULL DEFAULT 0,
+      git_branch TEXT, git_origin_url TEXT, recency_at INTEGER NOT NULL DEFAULT 0,
+      thread_source TEXT
+    );
+  \`]);
+  process.stdout.write(JSON.stringify({ id: request.id, result: { userAgent: "fixture-test" } }) + "\\n");
+});
+`);
+      fs.chmodSync(fakeCodex, 0o755);
+
+      const output = execFileSync("/bin/bash", [path.join(__dirname, "..", "demo/setup-fixture.sh")], {
+        cwd: path.join(__dirname, ".."),
+        env: {
+          ...process.env,
+          CODEX_PROJECT_HISTORY_CODEX_BIN: fakeCodex,
+          CODEX_PROJECT_HISTORY_DEMO_ROOT: fixtureRoot,
+        },
+        encoding: "utf8",
+      });
+
+      const stateRoot = path.join(fixtureRoot, "codex-state");
+      const database = path.join(stateRoot, "state_5.sqlite");
+      const schemaColumns = execFileSync(
+        "/usr/bin/sqlite3",
+        [database, "SELECT name FROM pragma_table_info('threads') ORDER BY cid;"],
+        { encoding: "utf8" },
+      ).trim().split("\n");
+      assert.ok(schemaColumns.includes("rollout_path"));
+      assert.ok(schemaColumns.includes("model_provider"));
+
+      const chats = loadChats({ codexHome: stateRoot });
+      assert.equal(chats.length, 3);
+      const workspace = path.join(fixtureRoot, "projects/acme-dashboard");
+      const groups = organizeChats(chats, [workspace], workspaceProjectKeys([workspace]));
+      assert.equal(groups.length, 2);
+      assert.equal(groups[0].label, "example/acme-dashboard");
+      assert.equal(groups[0].current, true);
+      assert.deepEqual(groups[0].chats.map((chat) => chat.id), [
+        "00000000-0000-4000-8000-000000000001",
+        "00000000-0000-4000-8000-000000000002",
+      ]);
+      assert.match(output, /official Codex runtime initialized the disposable state database/i);
+      assert.match(output, /CODEX_HOME=.*CODEX_SQLITE_HOME=/);
+      assert.match(output, /Do not open the synthetic chats/);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  },
+);
+
 test("demo and test UUIDs use only the synthetic fixture namespace", () => {
   for (const filename of ["demo/setup-fixture.sh", "test/history.test.js"]) {
     const source = fs.readFileSync(path.join(__dirname, "..", filename), "utf8");

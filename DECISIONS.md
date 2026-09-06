@@ -2,14 +2,27 @@
 
 ## Open Questions
 
-- [ ] Update the demo setup to initialize a complete, isolated Codex schema before loading
-  synthetic rows; the minimal fixture causes the official app-server to fail initialization
-  (see the 2026-09-06 isolated activation report).
 - [ ] Choose whether to publish v0.1.4 only on GitHub first or also to the VS Code Marketplace.
 - [ ] After the first public release, add a pinned vendor receipt to the private dotfiles copy so
   cross-machine installs can verify which public release they contain.
 
 ---
+
+## 2026-09-06 - Demo schema comes from the installed official Codex runtime `ACTIVE`
+
+**What:** The privacy-safe demo locates the Codex executable bundled with `openai.chatgpt`, runs
+its `app-server` initialization protocol with disposable `CODEX_HOME` and `CODEX_SQLITE_HOME`
+directories, and inserts synthetic picker rows only after that process exits successfully. A
+binary-path override exists for automated tests and nonstandard installations.
+
+**Why:** Copying an internal schema or maintaining a minimal lookalike database breaks when Codex
+adds required tables or columns. Letting the installed dependency create its own isolated schema
+tracks the exact runtime that will open the demo window without touching real chat history.
+
+**Impact:** Demo setup now requires Node.js, the official OpenAI extension, and its bundled Codex
+binary. Upstream protocol or directory-layout changes fail closed with a diagnostic and require a
+compatibility update. Synthetic rows still have no transcripts and must not be presented as proof
+of chat reopening.
 
 ## 2026-09-03 - Standalone repository becomes canonical after public release `ACTIVE`
 
