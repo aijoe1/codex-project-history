@@ -57,7 +57,7 @@ warnings for missing rollout files, Git warnings because the fixture repository 
 commit, and upstream Node deprecation warnings. These are not evidence of a clean end-to-end
 Codex conversation session.
 
-Commit `22b3847c018faa162c39983a8f68989923b18958` resolves this by locating the Codex executable
+Commit `1eb0bb55b8f48a6dfe8967234d6d087dcc18db96` resolves this by locating the Codex executable
 bundled with the installed `openai.chatgpt` extension and sending its `app-server` an `initialize`
 request with disposable `CODEX_HOME` and `CODEX_SQLITE_HOME` directories. The setup inserts
 synthetic rows only after the official process exits successfully. It never points the runtime at
@@ -65,7 +65,8 @@ the user's real database.
 
 ## Compatible demo retest
 
-- Tested fix: `22b3847c018faa162c39983a8f68989923b18958`.
+- Tested fix: `1eb0bb55b8f48a6dfe8967234d6d087dcc18db96` (tree-identical to the
+  isolated test commit used to build the artifact).
 - Rebuilt package: `codex-project-history-0.1.4.vsix`.
 - Package SHA-256: `a05cefc9d8c4d80f7bb16dd1c6673b82424c2dd70421761a7db6d869057473a7`.
 - Fresh isolated install: `aijoe1.codex-project-history@0.1.4` plus
