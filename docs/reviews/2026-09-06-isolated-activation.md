@@ -1,7 +1,7 @@
 # Isolated activation test - 2026-09-06
 
 Result: **PASS for picker activation and reload with an initialized synthetic database.**
-The bundled minimal demo database has a separate compatibility issue described below.
+The initial demo compatibility finding was fixed and independently retested later the same day.
 
 ## Artifact and environment
 
@@ -33,14 +33,14 @@ Reload used the actual **Developer: Reload Window** command. The extension-host 
 the first host exiting cleanly at 04:03:22, a new host starting, and both extensions activating
 again. The test window was closed at 04:03:59; both extension hosts exited with code zero.
 
-Evidence:
+Evidence (refreshed from the compatible-fixture retest below):
 
 - [Before reload: picker](activation-2026-09-06/before-reload-picker.png)
 - [Before reload: search](activation-2026-09-06/before-reload-search.png)
 - [After reload: picker](activation-2026-09-06/after-reload-picker.png)
 - [After reload: search](activation-2026-09-06/after-reload-search.png)
 
-## Fixture compatibility finding
+## Fixture compatibility finding and resolution
 
 The first attempt used the minimal database created by `demo/setup-fixture.sh` directly.
 Project History activated and its picker worked, but the official Codex app-server failed to
@@ -57,9 +57,36 @@ warnings for missing rollout files, Git warnings because the fixture repository 
 commit, and upstream Node deprecation warnings. These are not evidence of a clean end-to-end
 Codex conversation session.
 
-Before distributing the bundled demo instructions, update the fixture workflow to initialize
-the complete upstream schema in an isolated Codex home. Do not point the official runtime at a
-minimal table or a real user's database for demo setup.
+Commit `22b3847c018faa162c39983a8f68989923b18958` resolves this by locating the Codex executable
+bundled with the installed `openai.chatgpt` extension and sending its `app-server` an `initialize`
+request with disposable `CODEX_HOME` and `CODEX_SQLITE_HOME` directories. The setup inserts
+synthetic rows only after the official process exits successfully. It never points the runtime at
+the user's real database.
+
+## Compatible demo retest
+
+- Tested fix: `22b3847c018faa162c39983a8f68989923b18958`.
+- Rebuilt package: `codex-project-history-0.1.4.vsix`.
+- Package SHA-256: `a05cefc9d8c4d80f7bb16dd1c6673b82424c2dd70421761a7db6d869057473a7`.
+- Fresh isolated install: `aijoe1.codex-project-history@0.1.4` plus
+  `openai.chatgpt@26.901.22334` and its bundled Codex CLI 0.153.0.
+- The default demo command located the installed official binary and initialized a full disposable
+  schema. The final artifact test used the same supported binary override to target the exact
+  dependency installed in the isolated extensions directory.
+- The populated database contained three synthetic chats across two repositories. The installed
+  runtime JavaScript matched the tested source byte for byte.
+- Status bar, Control+Command+H, three-result grouping, current-project-first ordering, `deploy`
+  search, and the actual **Developer: Reload Window** cycle all passed before and after reload.
+- Extension-host logs show the old host exiting with code zero, a new host starting, both
+  extensions activating again, and the final host exiting with code zero. Project History's two
+  output logs were empty. No SQLite open, schema, compatibility, or activation error appeared.
+- The final clean run used fresh user data, in-memory secrets, and disabled sync, telemetry,
+  updates, and crash reporting. It did not select or resume a synthetic chat.
+
+The official extension still reports expected stale-rollout warnings because the synthetic picker
+rows deliberately have no transcript files. VS Code also reports upstream Node deprecation and
+empty-repository Git warnings. None indicates a state-database initialization failure, and the
+fixture remains unsuitable for validating chat reopening.
 
 ## Isolation and limits
 
