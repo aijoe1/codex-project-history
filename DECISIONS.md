@@ -2,11 +2,23 @@
 
 ## Open Questions
 
-- [ ] Choose whether to publish v0.1.4 only on GitHub first or also to the VS Code Marketplace.
 - [ ] After the first public release, add a pinned vendor receipt to the private dotfiles copy so
   cross-machine installs can verify which public release they contain.
 
 ---
+
+## 2026-09-06 - Publish v0.1.4 on GitHub before the VS Code Marketplace `ACTIVE`
+
+**What:** Publish the first public release at `aijoe1/codex-project-history` with the tested VSIX
+and its SHA-256 checksum. Defer VS Code Marketplace publication to a separate decision and
+approval.
+
+**Why:** A GitHub-first release makes the source, security boundary, installation path, and exact
+artifact independently reviewable while keeping Marketplace credentials and maintenance outside
+the first launch.
+
+**Impact:** GitHub becomes the canonical public source and release channel for v0.1.4. Marketplace
+availability must not be claimed until a later release is separately approved and verified.
 
 ## 2026-09-06 - Demo schema comes from the installed official Codex runtime `ACTIVE`
 
