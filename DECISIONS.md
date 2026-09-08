@@ -7,6 +7,21 @@
 
 ---
 
+## 2026-09-08 - Timeouts fail visibly and npm publication stays disabled `ACTIVE`
+
+**What:** Prepare v0.1.5 so a timeout reading the newest Codex state database is terminal rather
+than falling back to an older database. Mark the package private so npm refuses publication; the
+approved distribution channel remains GitHub Releases.
+
+**Why:** Schema incompatibility can justify trying an older state database, but a timeout says
+nothing about compatibility. Falling back in that case can silently show stale chat history.
+This extension is packaged as a VSIX and has no separately approved npm destination.
+
+**Impact:** Slow or locked current databases now produce a concise timeout instead of stale
+results. Future npm publication requires an explicit decision that removes the private guard.
+The user approved continuing with the prepared v0.1.5 GitHub release on 2026-09-08.
+Publish the tested branch revision; merging either repository remains a separate step.
+
 ## 2026-09-06 - Publish v0.1.4 on GitHub before the VS Code Marketplace `ACTIVE`
 
 **What:** Publish the first public release at `aijoe1/codex-project-history` with the tested VSIX

@@ -7,6 +7,7 @@ const path = require("node:path");
 const test = require("node:test");
 const Module = require("node:module");
 const { execFileSync } = require("node:child_process");
+const manifest = require("../package.json");
 const {
   buildCodexThreadUri,
   candidateStateDatabases,
@@ -22,6 +23,10 @@ const {
   sqliteErrorMessage,
   workspaceProjectKeys,
 } = require("../src/history");
+
+test("release manifest disables npm publication", () => {
+  assert.equal(manifest.private, true);
+});
 
 test("state databases are selected newest-schema-first", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-history-test-"));
@@ -63,6 +68,34 @@ test("loader falls back when the newest state database is incompatible", () => {
     });
     assert.deepEqual(calls, ["state_9.sqlite", "state_8.sqlite"]);
     assert.equal(chats.length, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("loader reports a newest-database timeout instead of returning stale history", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-history-test-"));
+  try {
+    fs.writeFileSync(path.join(root, "state_9.sqlite"), "");
+    fs.writeFileSync(path.join(root, "state_8.sqlite"), "");
+    const calls = [];
+    assert.throws(
+      () =>
+        loadChats({
+          codexHome: root,
+          run(_binary, args) {
+            calls.push(path.basename(args[2]));
+            if (args[2].endsWith("state_9.sqlite")) {
+              const error = new Error("command timed out");
+              error.code = "ETIMEDOUT";
+              throw error;
+            }
+            return JSON.stringify([{ id: "stale", cwd: "/work/old-repo" }]);
+          },
+        }),
+      /state_9\.sqlite: SQLite read timed out after 2000 ms/,
+    );
+    assert.deepEqual(calls, ["state_9.sqlite"]);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -468,6 +501,7 @@ for (const immutable of [false, true]) {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-timeout-test-"));
     try {
       fs.writeFileSync(path.join(root, "state_5.sqlite"), "");
+      fs.writeFileSync(path.join(root, "state_4.sqlite"), "");
       let calls = 0;
       let timedOut;
       assert.throws(() => loadChats({
