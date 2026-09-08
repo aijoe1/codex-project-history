@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-08 01:58 | [codex] | Published v0.1.5 from `96613a1` after macOS and Linux CI passed; downloaded the public VSIX and verified SHA-256 `98786cae70cd51d5ab7b6521195950905d6ad75d8db8e273f044264bbc5cb233` and the tag commit | Release is available on GitHub; release branch and dotfiles distribution PR await separate merge decisions. Marketplace and social publication remain deferred.
+
 One chronological line per completed or paused agent session:
 
 `YYYY-MM-DD HH:MM | [claude|codex] | what changed | what remains / next step`
