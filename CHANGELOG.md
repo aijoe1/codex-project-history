@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5 - 2026-09-08
+
+- Report a timeout reading the newest Codex state database instead of silently returning history
+  from an older database.
+- Mark the VSIX-only package private so npm publication remains disabled.
+
 ## 0.1.4 - 2026-09-03
 
 - Initialize the privacy-safe demo with the installed official Codex runtime instead of a minimal,

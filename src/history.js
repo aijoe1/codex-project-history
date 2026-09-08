@@ -77,6 +77,10 @@ function sqliteErrorMessage(error) {
   return compact.length > 320 ? `${compact.slice(0, 319).trimEnd()}…` : compact;
 }
 
+function isTimeout(error) {
+  return error?.code === "ETIMEDOUT";
+}
+
 function isCantOpen(error) {
   return /unable to open database file(?:\s*\(14\))?/i.test(sqliteErrorMessage(error));
 }
@@ -124,6 +128,9 @@ function loadChats({ codexHome, maxChats = 300, run = execFileSync, onDiagnostic
     try {
       return queryChats(database, query, run);
     } catch (error) {
+      if (isTimeout(error)) {
+        throw new Error(`${path.basename(database)}: ${sqliteErrorMessage(error)}`);
+      }
       if (isCantOpen(error) && walSidecarsAbsent(database)) {
         try {
           const snapshot = queryChats(database, query, run, true);
@@ -144,6 +151,9 @@ function loadChats({ codexHome, maxChats = 300, run = execFileSync, onDiagnostic
           );
           return snapshot;
         } catch (retryError) {
+          if (isTimeout(retryError)) {
+            throw new Error(`${path.basename(database)}: ${sqliteErrorMessage(retryError)}`);
+          }
           failures.push(
             `${path.basename(database)}: ${sqliteErrorMessage(error)}; immutable retry: ${sqliteErrorMessage(retryError)}`,
           );

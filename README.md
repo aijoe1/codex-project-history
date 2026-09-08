@@ -22,6 +22,8 @@ without changing Codex history.
 - The system `/usr/bin/sqlite3` executable
 
 This release is intentionally macOS-first. Linux and Windows packaging are not yet supported.
+If the newest Codex state database times out, the picker reports the failure instead of silently
+falling back to an older database and presenting stale history.
 
 ## Install from source
 
