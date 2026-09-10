@@ -8,7 +8,10 @@ Exact approved copy and media checksum: [launch receipt](x-launch-receipt.md).
 
 Observed approximately 22:02 EDT, 44 minutes after publication: 15 views, 2 likes, 1 reply,
 0 reposts, 0 bookmarks. Reply: https://x.com/FlorinIluta/status/2097866989708468609
-It asks whether old chats are picked up automatically. No reply has been sent.
+It asks whether old chats are picked up automatically. The owner subsequently reported replying
+that existing unarchived VS Code chats load automatically, current-workspace chats appear first,
+repo/branch labels distinguish projects, and the default limit is 300. This reply was not
+independently read back; do not send it again. Exact owner-reported text is in NEXT-SESSION.md.
 
 ## Manual measurement plan
 
@@ -58,7 +61,12 @@ remove private paths and chat titles from screenshots or diagnostics.
 Attachment if owner submits: ../media/project-chats-button-demo-pullback-v0.1.5.mp4.
 No Reddit upload or submission performed. Test statements above are owner-reported.
 
-## Technical handoff
+## Technical handoff (resolved September 9, 23:35 EDT)
+
+An existing-file apply_patch to DECISIONS.md now succeeded and was read back in the Git diff.
+Records are being reconciled in this session; restarting or replacing installed binaries was
+not necessary for this successful retry. This proves current editing works, not the underlying
+cause of the earlier helper failure. The diagnosis below is retained as historical evidence.
 
 Earlier patch failures invoke removed extension version 26.901.22334. Installed version is
 26.903.61454; its Codex 0.153.4 executable runs. An add-only patch created x-launch-receipt.md,
@@ -66,7 +74,6 @@ verified by reading the actual file. A subsequent patch updating existing files 
 the stale filesystem helper. Therefore saving new files worked, but existing-file editing is
 not repaired. No editor reload, permission change, or binary replacement was performed.
 
-Existing launch-packet-v0.1.5.md and HANDOFF-INDEX.md remain outdated; reconcile after restarting
-the affected Codex/editor session and verifying an existing-file patch. Do not reinstall Project
-Chats or restore obsolete executable paths as a workaround. These new records are uncommitted
-and unpushed. No monitoring, replies, new publication, or paid promotion authorized.
+Launch and shared records have been reconciled; consult Git for their commit status.
+Do not reinstall Project Chats or restore obsolete executable paths as a workaround.
+No monitoring, replies, new publication, push, or paid promotion is authorized.

@@ -1,5 +1,35 @@
 # Decision Log
 
+## 2026-09-09 - X launch followed by evidence-led, manual Reddit distribution `ACTIVE`
+
+**What:** Published the explicitly approved question-led X post and synthetic status-bar demo;
+review early feedback before broader distribution. Prepare Reddit content for manual submission.
+
+**Why:** Specific workflow pain and a visible picker demo communicate the utility without novelty
+claims. The recorded r/codex rules check prohibits bots and favors detailed, useful showcases.
+
+**Impact:** Owner reports answering the first X question. No further replies/publication approved.
+Measurement targets are manual; records remain local until separate push approval.
+Launch evidence and remaining work: `docs/briefs/x-launch-receipt.md` and
+`docs/briefs/launch-followup-v0.1.5.md`.
+
+## 2026-09-08 - Share as a focused utility, not a unique category `ACTIVE`
+
+**What:** Keep the opportunity verdict at 79/100 and share Codex Project History as a deliberately
+narrow open-source picker for multi-project Codex users. Lead with the firsthand workflow problem,
+the current-project-first shortcut, and the honest macOS/read-only boundary. Do not claim the tool is
+the first, only, or comprehensive solution.
+
+**Why:** OpenAI issue #25319 remained open with 80 thumbs-up reactions and 37 comments and requests
+almost the exact shipped behavior. Independent Reddit and OpenAI issue reports pass the demand gate.
+However, VS Code now documents a workspace-aware Sessions surface with external Codex support, and
+several Marketplace extensions offer broader project history management.
+
+**Impact:** Review the text-only reply on the canonical OpenAI issue first. Prepare the synthetic
+demo separately, then the r/codex post after checking current community rules, and the X demo post.
+The failed copied-app capture attempt does not block review of the text reply. Marketplace
+publication and any public post remain separate approval boundaries.
+
 ## Open Questions
 
 - [ ] After the first public release, add a pinned vendor receipt to the private dotfiles copy so
@@ -50,6 +80,20 @@ tracks the exact runtime that will open the demo window without touching real ch
 binary. Upstream protocol or directory-layout changes fail closed with a diagnostic and require a
 compatibility update. Synthetic rows still have no transcripts and must not be presented as proof
 of chat reopening.
+
+## 2026-09-08 - Isolated demo launches use a short VS Code user-data path `ACTIVE`
+
+**What:** The demo setup creates a separate VS Code user-data directory under `/tmp` and includes
+`--new-window --user-data-dir=...` in the printed launch command.
+
+**Why:** A launch under the normal macOS `TMPDIR` failed before opening a window because VS Code's
+Unix-domain IPC socket path exceeded its 103-character limit. A separate user-data root also makes
+the fixture environment reach a new process when the user's normal VS Code instance is already
+running.
+
+**Impact:** Demo capture no longer depends on closing the normal editor. The temporary Codex state
+and VS Code user-data directories are both printed for explicit cleanup after the demo window is
+closed. This changes only the demo workflow, not the extension's runtime interface.
 
 ## 2026-09-03 - Standalone repository becomes canonical after public release `ACTIVE`
 

@@ -1,5 +1,19 @@
 # Continue Project Chats after requested wrapup
 
+## Reconciliation update — September 9, 2026, 23:35 EDT
+
+Existing-file apply_patch now works, verified against DECISIONS.md and the actual Git diff.
+Shared records and historical launch/capture gates have been reconciled. The old pending steps
+below are retained as provenance, not instructions to repeat completed work. No fresh chat was
+started, because the save blocker cleared in the existing session; native window control had
+failed during the attempted transition. No installed binaries or permissions were changed.
+
+Next: review X feedback at the manual September 10, 21:18 EDT checkpoint. No scheduled monitor,
+new post, reply, Reddit submission, push, merge, or release is authorized. Review the latest
+HANDOFF-INDEX.md and Git status first. Earlier alternative video edits are preserved untracked;
+the approved pullback video is already committed. See docs/reviews/2026-09-09-wrapup-validation.md
+for the pending demo changes' validation and the exact scope of this close-out.
+
 Recorded September 9, 2026, 22:21 EDT. This file is the authoritative continuation snapshot;
 older launch-packet and HANDOFF-INDEX status lines are historical and not current.
 
