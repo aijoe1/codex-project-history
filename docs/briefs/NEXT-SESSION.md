@@ -1,23 +1,27 @@
 # Continue Project Chats after requested wrapup
 
-## Reconciliation update — September 9, 2026, 23:35 EDT
+## Reconciliation update — September 10, 2026, 19:49 EDT
 
-Existing-file apply_patch now works, verified against DECISIONS.md and the actual Git diff.
-Shared records and historical launch/capture gates have been reconciled. The old pending steps
-below are retained as provenance, not instructions to repeat completed work. No fresh chat was
-started, because the save blocker cleared in the existing session; native window control had
-failed during the attempted transition. No installed binaries or permissions were changed.
+Shared records and historical launch/capture gates have been reconciled. The two local wrapup
+commits were pushed, then merged with the current `origin/main` in an isolated worktree to resolve
+the duplicate v0.1.5 release-history conflict. Pull request #2 is open at
+https://github.com/aijoe1/codex-project-history/pull/2. The old pending steps below are retained as
+provenance, not instructions to repeat completed work. The earlier temporary worktree and its two
+untracked alternate video exports no longer exist; the approved pullback video remains tracked.
 
-Next: review X feedback at the manual September 10, 21:18 EDT checkpoint. No scheduled monitor,
-new post, reply, Reddit submission, push, merge, or release is authorized. Review the latest
-HANDOFF-INDEX.md and Git status first. Earlier alternative video edits are preserved untracked;
-the approved pullback video is already committed. See docs/reviews/2026-09-09-wrapup-validation.md
-for the pending demo changes' validation and the exact scope of this close-out.
+Next: after all checks pass on the exact pull-request head, request a separate decision before
+merging pull request #2. Review X feedback at the manual September 10, 21:18 EDT checkpoint. No
+scheduled monitor, new post, reply, Reddit submission, merge, or release is authorized. Start from
+the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
+pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
 
-Recorded September 9, 2026, 22:21 EDT. This file is the authoritative continuation snapshot;
-older launch-packet and HANDOFF-INDEX status lines are historical and not current.
+The initial snapshot was recorded September 9, 2026, 22:21 EDT. This updated reconciliation is
+the authoritative continuation snapshot; older launch-packet and HANDOFF-INDEX status lines are
+historical and not current.
 
-## Next-session prompt
+## Historical next-session prompt (superseded)
+
+Do not follow this section as current instructions; it records the state before pull request #2.
 
 Continue the Project Chats launch in `/private/tmp/codex-project-history-v015`, branch
 `codex/timeout-terminal-v015`. Do not work in Peptide Portal (the previous session's unrelated cwd).

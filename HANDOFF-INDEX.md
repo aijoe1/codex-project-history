@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-10 19:49 EDT | [codex] | Pushed the two v0.1.5 launch/wrapup commits, opened PR #2, reconciled its duplicate-release conflict with current main, and verified the merged tree with 25 tests, static checks, official-runtime fixture creation, and a 3-chat/2-project smoke | Exact-head CI and final review must pass before a separately approved merge. Manual 24-hour X feedback review remains due September 10 at 21:18 EDT; no new publication or monitoring authorized.
+
 2026-09-09 23:38 EDT | [codex] | Completed interrupted launch wrapup: existing-file editing works; reconciled X publication, approved final video, owner-reported reply, and historical draft gates; reviewed demo isolation changes; 25 tests, syntax checks, actual-runtime fixture creation and 3-chat/2-project grouping smoke passed | No fresh chat needed for save recovery; no UI reload/reopening re-test. Two alternate video exports preserved untracked. No push, new publication, or monitoring. Next manual feedback checkpoint September 10 at 21:18 EDT; see docs/reviews/2026-09-09-wrapup-validation.md and docs/briefs/NEXT-SESSION.md.
 
 2026-09-08 01:58 | [codex] | Published v0.1.5 from `96613a1` after macOS and Linux CI passed; downloaded the public VSIX and verified SHA-256 `98786cae70cd51d5ab7b6521195950905d6ad75d8db8e273f044264bbc5cb233` and the tag commit | Release is available on GitHub; release branch and dotfiles distribution PR await separate merge decisions. Marketplace and social publication remain deferred.
