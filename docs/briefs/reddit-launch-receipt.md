@@ -49,7 +49,21 @@ Subject: **Showcase post removed by automated filters**
 > Would you please review whether it can be approved? I won’t repost while waiting. Thanks.
 
 The Reddit UI displayed `Message sent` and cleared the form after submission. No additional
-message, repost, or moderator response has been sent or observed.
+message or repost was sent.
+
+## Automated moderator response
+
+At 2026-09-11 00:38 EDT, the `modmail-karma` moderator account replied automatically. The response
+reported that `u/nightlydaytrader` has 0 r/Codex comment karma and that the moderation team does not
+respond to accounts with less than 1 subreddit comment karma. It said this is probably why the post
+was removed, encouraged participation in r/Codex discussions, and also said highly detailed and
+helpful posts are allowed regardless of karma.
+
+This is an automated template, not a human review or proof of the sole filter cause. Its probable
+cause and its high-detail exception are in tension because this submission was a detailed Showcase.
+The actionable gate is nevertheless clear: do not reply or repost now. Participate genuinely in
+r/Codex, verify that the account's displayed r/Codex comment karma is at least 1, then recheck the
+original post. If it remains filtered, request one human review in the existing Modmail thread.
 
 ## Exact submitted copy, revision r3
 

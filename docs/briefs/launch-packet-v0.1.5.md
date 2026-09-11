@@ -8,6 +8,9 @@ The final status-bar video was approved and published with X. The owner manually
 Reddit post, but Reddit's automated filters immediately removed it. See the [X receipt](x-launch-receipt.md),
 [Reddit attempt receipt](reddit-launch-receipt.md), and [current follow-up](launch-followup-v0.1.5.md).
 One owner-approved Modmail appeal was sent September 11 at approximately 00:38 EDT.
+The automated response cited 0 r/Codex comment karma as the probable removal cause and said the
+moderation team responds only after the account reaches at least 1, despite also claiming detailed
+helpful posts are exempt.
 The original drafts and proposed order below are historical, not outstanding publication tasks.
 
 ## Recommendation
@@ -132,4 +135,5 @@ The GitHub reply above and the separately approved question-led X post are alrea
 The historical X copy above was not the selected copy; use x-launch-receipt.md for the exact post.
 Do not post either again. The owner manually submitted Reddit revision r3, but Reddit filtered it;
 do not repost. One approved Modmail appeal was sent; any additional post, reply, or moderator
-message requires separate approval.
+message requires separate approval. The next channel step is genuine r/Codex participation, then
+rechecking the original post after the account reaches at least 1 r/Codex comment karma.

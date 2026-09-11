@@ -1,5 +1,19 @@
 # Decision Log
 
+## 2026-09-11 - Resolve the r/Codex participation gate before further distribution `ACTIVE`
+
+**What:** Do not reply to Modmail or repost Project Chats yet. Participate genuinely in r/Codex
+discussions, verify that `u/nightlydaytrader` reaches at least 1 r/Codex comment karma, and then
+recheck the original post. If it remains filtered, request human review in the existing thread.
+
+**Why:** The immediate automated Modmail response reported 0 r/Codex comment karma, said moderators
+do not respond below 1, and identified that as the probable removal cause. It also claimed detailed
+helpful posts are exempt, so the specific filter logic remains unresolved rather than proven.
+
+**Impact:** Reddit distribution remains incomplete and has no exposure baseline. Genuine community
+participation is the next channel step; do not manufacture engagement, mass-comment, repost, or send
+another appeal merely to bypass the filter.
+
 ## 2026-09-10 - Appeal the filtered Reddit post before any repost `ACTIVE`
 
 **What:** Treat the manually submitted r/codex post as a filtered launch attempt, not a completed

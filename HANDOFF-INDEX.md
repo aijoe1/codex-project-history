@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-11 00:41 EDT | [codex] | Independently read the immediate `modmail-karma` response: u/nightlydaytrader has 0 r/Codex comment karma, moderators do not respond below 1, and the template says this is probably why the post was removed while also claiming detailed helpful posts are exempt | Treat the channel cause as probable, not proven. Do not reply or repost; participate genuinely, verify at least 1 subreddit comment karma, then recheck the original post.
+
 2026-09-11 00:38 EDT | [codex] | Sent the exact owner-approved Modmail appeal to r/codex moderators from u/nightlydaytrader and verified Reddit's `Message sent` confirmation | Post remains filtered unless independently verified otherwise. Do not repost or send another moderator message; next measurement remains September 16.
 
 2026-09-10 23:57 EDT | [codex] | Verified the owner-manual r/codex submission, exact r3 copy, Showcase flair, 11-second demo, and permanent URL; Reddit's automated filters immediately removed the post; recorded a launch-attempt receipt and kept the MAINTAIN decision | Do not interpret Reddit reach or repost. Recommended next external action is one separately approved Modmail appeal; X/GitHub review remains September 16.

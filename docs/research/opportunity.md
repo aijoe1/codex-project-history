@@ -5,12 +5,13 @@ Owner: Joseph Yu
 First observed: 2026-09-02
 Research last checked: 2026-09-08 (historical evidence, not refreshed by the wrapup)
 Distribution updated: 2026-09-11; GitHub and X published, Reddit submitted manually then filtered,
-and one Modmail appeal sent.
+one Modmail appeal sent, and an automated 0-comment-karma response received.
 Current receipts: `../briefs/x-launch-receipt.md`, `../briefs/reddit-launch-receipt.md`, and
 `../briefs/launch-followup-v0.1.5.md`.
 Decision: BUILD AND SHARE
 Follow-up decision: MAINTAIN; next measurement September 16. The Reddit test produced no exposure
-result because automated filters removed it; one approved Modmail appeal was sent September 11.
+result because automated filters removed it. The automated appeal response identifies 0 r/Codex
+comment karma as the probable channel gate; genuine participation precedes any further appeal.
 Score: 79/100
 
 ## Problem
@@ -129,7 +130,7 @@ now solve overlapping jobs. This is not an uncontested category.
 | Channel | Native angle | Draft revision | Approval | URL/status |
 | --- | --- | --- | --- | --- |
 | OpenAI issue #25319 | Useful affiliation-disclosed implementation reply | `launch-packet-v0.1.5-r1` | Exact draft approved by owner | [Published and read back](https://github.com/openai/codex/issues/25319#issuecomment-5594914552), 2026-09-09 02:35:58 UTC |
-| r/codex | Firsthand workflow fix with limits | Follow-up r3 | Owner submitted manually after reviewing copy, flair, and rules | [Filtered immediately after submission](../briefs/reddit-launch-receipt.md); one Modmail appeal sent September 11 |
+| r/codex | Firsthand workflow fix with limits | Follow-up r3 | Owner submitted manually after reviewing copy, flair, and rules | [Filtered immediately after submission](../briefs/reddit-launch-receipt.md); automated appeal response cited 0 subreddit comment karma as probable cause |
 | X | Question-led workflow friction plus status-bar clip | Selected option 1; exact copy in X receipt | Owner approved copy and final video | [Published September 9, 21:18 EDT](https://x.com/nightlydaytrade/status/2097857090358329527) |
 
 ## Results

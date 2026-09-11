@@ -40,8 +40,10 @@ Decision: `MAINTAIN`. Do not change product scope or pay to promote this post fr
 The owner manually attempted the r/codex distribution experiment on September 10, but Reddit's
 automated filters immediately removed it. This is a distribution failure, not a demand result.
 The owner separately approved one Modmail appeal, which was sent September 11 at approximately
-00:38 EDT and verified by Reddit's `Message sent` confirmation. Review cumulative signals again
-September 16.
+00:38 EDT and verified by Reddit's `Message sent` confirmation. An immediate automated reply cited
+0 r/Codex comment karma as the probable removal cause and a minimum of 1 for moderator responses,
+while also claiming detailed helpful posts are exempt. Treat this as an unresolved distribution
+gate. Review cumulative signals again September 16.
 
 ## Manual measurement plan
 
@@ -85,7 +87,9 @@ at approximately September 10, 23:56 EDT. Reddit created the post URL but immedi
 that its filters removed the post. Exact copy, URL, media checksum, UI verification, and the
 measurement boundary are in [the Reddit launch attempt receipt](reddit-launch-receipt.md).
 
-Do not repost. One Modmail appeal was sent; no additional moderator message is approved.
+Do not repost or reply again now. Participate genuinely in r/Codex first; after the account shows
+at least 1 r/Codex comment karma, recheck the original post and request human review only if it is
+still filtered.
 
 ## Technical handoff (resolved September 9, 23:35 EDT)
 
