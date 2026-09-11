@@ -1,5 +1,37 @@
 # Decision Log
 
+## 2026-09-11 - Archived chats open read-only; restoration is explicit and CLI-mediated `ACTIVE`
+
+**What:** Add a separate project-aware archive picker that opens archived JSONL transcripts as
+read-only virtual text documents inside VS Code. Keep restoration behind its own modal confirmation
+and delegate the mutation to `codex unarchive <UUID>` with an exact argument-vector invocation.
+Never write the Codex database directly and never automatically rearchive on editor close.
+
+**Why:** The user wants to revisit archives without browsing local folders or silently changing
+their state. Reusing the shipped Project Chats grouping keeps the workflow native. A virtual text
+document avoids a custom webview and treats transcript content as untrusted text. Automatic
+unarchive/rearchive cannot recover reliably from window reloads, crashes, or concurrent clients.
+
+**Product-flow preflight:** User: a multi-project Codex user. Job: find and reread an archived
+conversation. Primary action: choose it from **Codex: Search Archived Chats by Project**. Required
+information: title, repository, branch, age, and working directory. Trust concern: private transcript
+exposure or accidental restoration. Observable success: a readable in-editor transcript opens and
+the archived-row count stays unchanged. Borrow: the shipped Project Chats Quick Pick, VS Code's
+native virtual-document editor, and the official Codex editor for active chats. Do not copy: custom
+HTML rendering, implicit restoration, or lifecycle-based rearchiving.
+
+**Threat model and compatibility:** Resolve each transcript and its allowed archive roots through
+the filesystem before reading; require a matching UUID and `.jsonl` suffix; reject paths outside
+configured `archived_sessions` roots. Render only user/assistant text, filter known injected context,
+omit tool output and image bytes, and cap rendered text at four million characters. Validate restore
+UUIDs, prefer the official extension's bundled binary, avoid shell execution, bound the CLI process
+to ten seconds, and require explicit confirmation.
+The SQLite and JSONL formats remain private OpenAI compatibility surfaces and must fail closed.
+
+**Impact:** Prepare v0.2.0 on a feature branch. Viewing remains read-only. Restoration changes state
+only after the user chooses the dedicated action and confirms it. Publishing, installing over v0.1.5,
+refreshing the dotfiles vendor snapshot, and merging remain separate release decisions.
+
 ## 2026-09-10 - Maintain the shipped wedge and test distribution separately `ACTIVE`
 
 **What:** Keep Project Chats v0.1.5 unchanged after the first X follow-up. Treat the prepared

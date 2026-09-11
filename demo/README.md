@@ -10,8 +10,9 @@ environment reaches the new process and avoids VS Code's macOS IPC socket-path l
 
 The demo requires the VS Code `code` command, the official OpenAI Codex extension, Node.js, and
 `/usr/bin/sqlite3`. For automated or nonstandard installations, set
-`CODEX_PROJECT_HISTORY_CODEX_BIN` to the official Codex executable. These fixture entries have no
-transcripts and are only for demonstrating the picker; do not select them for reopening.
+`CODEX_PROJECT_HISTORY_CODEX_BIN` to the official Codex executable. Active fixture entries have no
+transcripts and should not be reopened. One archived entry has a fictional transcript specifically
+for exercising the read-only archive viewer; do not try to restore its synthetic session ID.
 
 Capture an 8 to 15 second clip:
 
@@ -19,7 +20,8 @@ Capture an 8 to 15 second clip:
 2. Press **Control+Command+H**.
 3. Pause on the current-project-first group, branch, and path labels.
 4. Type `deploy` to demonstrate filtering.
-5. End on: `Local. Read-only. Project-aware.`
+5. Run **Codex: Search Archived Chats by Project**, then open the synthetic archived result.
+6. End on its read-only transcript banner: `Opening this document did not restore or modify the chat.`
 
 Before sharing, inspect every frame for usernames, notifications, tabs, private repository names,
 or local paths. The fixture path under the system temporary directory is safe to show. Close the

@@ -23,6 +23,19 @@ const {
   sqliteErrorMessage,
   workspaceProjectKeys,
 } = require("../src/history");
+const {
+  isInjectedUserText,
+  messageFromRecord,
+  readArchivedTranscript,
+  renderTranscript,
+  resolveArchivedTranscript,
+} = require("../src/transcript");
+const {
+  RESTORE_TIMEOUT_MS,
+  bundledCodexPath,
+  restoreErrorMessage,
+  unarchiveChat,
+} = require("../src/restore");
 
 test("release manifest disables npm publication", () => {
   assert.equal(manifest.private, true);
@@ -49,7 +62,33 @@ test("history query is bounded and includes only user VS Code chats", () => {
   const query = chatQuery(80);
   assert.match(query, /source = 'vscode'/);
   assert.match(query, /thread_source.*'user'/s);
+  assert.match(query, /archived = 0/);
+  assert.match(query, /rollout_path/);
   assert.match(query, /LIMIT 80/);
+
+  const archivedQuery = chatQuery(80, { archived: true });
+  assert.match(archivedQuery, /archived = 1/);
+  assert.doesNotMatch(archivedQuery, /archived = 0/);
+});
+
+test("loader sends the archived selector to SQLite without changing the database", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-history-test-"));
+  try {
+    fs.writeFileSync(path.join(root, "state_5.sqlite"), "");
+    let query;
+    loadChats({
+      codexHome: root,
+      archived: true,
+      run(_binary, args) {
+        query = args[3];
+        return "[]";
+      },
+    });
+    assert.match(query, /archived = 1/);
+    assert.doesNotMatch(query, /\b(?:UPDATE|INSERT|DELETE|REPLACE|ALTER|DROP)\b/i);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test("loader falls back when the newest state database is incompatible", () => {
@@ -421,9 +460,200 @@ test("same-named repositories on different hosts get distinct labels", () => {
   ]);
 });
 
+test("archived transcript paths stay inside the configured Codex archive", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-archive-test-"));
+  const archive = path.join(root, "archived_sessions");
+  const id = "00000000-0000-4000-8000-000000000001";
+  const transcript = path.join(archive, `rollout-${id}.jsonl`);
+  try {
+    fs.mkdirSync(archive);
+    fs.writeFileSync(transcript, "");
+    assert.equal(
+      resolveArchivedTranscript(
+        { id, archived: 1, rollout_path: transcript },
+        { sqliteHome: root, dataHome: root },
+      ),
+      fs.realpathSync(transcript),
+    );
+
+    const outside = path.join(root, `outside-${id}.jsonl`);
+    fs.writeFileSync(outside, "");
+    assert.throws(
+      () =>
+        resolveArchivedTranscript(
+          { id, archived: 1, rollout_path: outside },
+          { sqliteHome: root, dataHome: root },
+        ),
+      /outside the configured Codex archive/,
+    );
+    assert.throws(
+      () =>
+        resolveArchivedTranscript(
+          { id, archived: 0, rollout_path: transcript },
+          { sqliteHome: root, dataHome: root },
+        ),
+      /not archived/,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("transcript parser keeps conversation text and removes injected session context", () => {
+  assert.equal(isInjectedUserText("<environment_context>private runtime</environment_context>"), true);
+  assert.equal(isInjectedUserText("ordinary user text"), false);
+
+  const user = messageFromRecord({
+    type: "response_item",
+    payload: {
+      type: "message",
+      role: "user",
+      content: [
+        { type: "input_text", text: "<recommended_plugins>internal</recommended_plugins>" },
+        { type: "input_text", text: "Show me the archived chat." },
+        { type: "input_text", text: "<image>" },
+        { type: "input_image", image_url: "data:image/png;base64,not-rendered" },
+        { type: "input_text", text: "</image>" },
+      ],
+    },
+  });
+  assert.deepEqual(user, {
+    role: "user",
+    text: "Show me the archived chat.\n\n[Image attachment — not rendered in this read-only viewer]",
+  });
+  assert.deepEqual(
+    messageFromRecord({
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "assistant",
+        content: [{ type: "output_text", text: "Here it is." }],
+      },
+    }),
+    { role: "assistant", text: "Here it is." },
+  );
+  assert.equal(
+    messageFromRecord({
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "developer",
+        content: [{ type: "input_text", text: "Never render this." }],
+      },
+    }),
+    null,
+  );
+});
+
+test("archived JSONL renders as a bounded read-only transcript", async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-archive-test-"));
+  const archive = path.join(root, "archived_sessions");
+  const id = "00000000-0000-4000-8000-000000000001";
+  const transcript = path.join(archive, `rollout-${id}.jsonl`);
+  const records = [
+    {
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "user",
+        content: [{ type: "input_text", text: "First message" }],
+      },
+    },
+    {
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "assistant",
+        content: [{ type: "output_text", text: "A much longer assistant response" }],
+      },
+    },
+  ];
+  try {
+    fs.mkdirSync(archive);
+    fs.writeFileSync(transcript, `${records.map(JSON.stringify).join("\n")}\n`);
+    const output = await readArchivedTranscript({
+      chat: {
+        id,
+        archived: 1,
+        rollout_path: transcript,
+        display_title: "Archive test",
+        project_label: "example/project",
+        git_branch: "main",
+        cwd: "/work/project",
+      },
+      sqliteHome: root,
+      dataHome: root,
+      maxCharacters: 20,
+    });
+    assert.match(output, /Read-only snapshot/);
+    assert.match(output, /USER\n-+\nFirst message/);
+    assert.match(output, /ASSISTANT\n-+\nA much/);
+    assert.match(output, /Transcript truncated/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("transcript renderer contains no restore command or file mutation instruction", () => {
+  const output = renderTranscript(
+    {
+      id: "00000000-0000-4000-8000-000000000001",
+      display_title: "Read only",
+      project_label: "example/project",
+      cwd: "/work/project",
+    },
+    [{ role: "user", text: "Hello" }],
+  );
+  assert.match(output, /did not restore or modify/);
+  assert.doesNotMatch(output, /codex unarchive|UPDATE threads/i);
+});
+
+test("restore uses an exact argv call only after UUID validation", async () => {
+  const id = "00000000-0000-4000-8000-000000000001";
+  let invocation;
+  await unarchiveChat(id, {
+    binary: "/official-extension/bin/macos-aarch64/codex",
+    run: async (...args) => {
+      invocation = args;
+      return { stdout: "Unarchived session", stderr: "" };
+    },
+  });
+  assert.equal(invocation[0], "/official-extension/bin/macos-aarch64/codex");
+  assert.deepEqual(invocation[1], ["unarchive", id]);
+  assert.equal(invocation[2].timeout, RESTORE_TIMEOUT_MS);
+  assert.equal(invocation[2].killSignal, "SIGKILL");
+  await assert.rejects(() => unarchiveChat("bad; touch /tmp/nope"), /invalid Codex chat ID/);
+  await assert.rejects(() => unarchiveChat("------------------------------------"), /invalid Codex chat ID/);
+  assert.match(
+    restoreErrorMessage({ code: "ETIMEDOUT" }),
+    new RegExp(`${RESTORE_TIMEOUT_MS / 1000} seconds`),
+  );
+});
+
+test("restore prefers the official extension's bundled macOS Codex binary", () => {
+  assert.equal(
+    bundledCodexPath("/official-extension", {
+      platform: "darwin",
+      architecture: "arm64",
+      exists: (candidate) => candidate.endsWith("/bin/macos-aarch64/codex"),
+    }),
+    "/official-extension/bin/macos-aarch64/codex",
+  );
+  assert.equal(
+    bundledCodexPath("/official-extension", {
+      platform: "linux",
+      architecture: "x64",
+      exists: () => true,
+    }),
+    null,
+  );
+});
+
 test("status bar follows configuration changes without a reload", () => {
   let enabled = true;
   let listener;
+  const registeredCommands = [];
+  let registeredProviderScheme;
   const status = { showCount: 0, hideCount: 0 };
   const outputChannel = { appendLine() {}, dispose() {}, show() {} };
   const item = {
@@ -435,13 +665,30 @@ test("status bar follows configuration changes without a reload", () => {
     },
   };
   const vscode = {
-    commands: { registerCommand: () => ({ dispose() {} }) },
+    commands: {
+      registerCommand(command) {
+        registeredCommands.push(command);
+        return { dispose() {} };
+      },
+    },
+    EventEmitter: class EventEmitter {
+      constructor() {
+        this.event = () => ({ dispose() {} });
+      }
+      fire() {}
+      dispose() {}
+    },
+    extensions: { getExtension: () => ({}) },
     window: {
       createOutputChannel: () => outputChannel,
       createStatusBarItem: () => item,
     },
     workspace: {
       getConfiguration: () => ({ get: () => enabled }),
+      registerTextDocumentContentProvider(scheme) {
+        registeredProviderScheme = scheme;
+        return { dispose() {} };
+      },
       onDidChangeConfiguration(callback) {
         listener = callback;
         return { dispose() {} };
@@ -449,6 +696,7 @@ test("status bar follows configuration changes without a reload", () => {
     },
     StatusBarAlignment: { Left: 1 },
     QuickPickItemKind: { Separator: -1 },
+    Uri: { from: () => ({ toString: () => "archive:test" }) },
   };
   const originalLoad = Module._load;
   Module._load = function load(request, parent, isMain) {
@@ -461,6 +709,12 @@ test("status bar follows configuration changes without a reload", () => {
     const extension = require(extensionPath);
     const context = { subscriptions: [] };
     extension.activate(context);
+    assert.deepEqual(registeredCommands, [
+      "codexProjectHistory.open",
+      "codexProjectHistory.openArchived",
+      "codexProjectHistory.restoreArchived",
+    ]);
+    assert.equal(registeredProviderScheme, "codex-project-history-archive");
     assert.equal(status.showCount, 1);
     assert.equal(status.hideCount, 0);
 
@@ -481,6 +735,7 @@ test("Codex route validation rejects malformed chat IDs", () => {
   const id = "00000000-0000-4000-8000-000000000001";
   assert.equal(buildCodexThreadUri(id), `openai-codex://route/local/${id}`);
   assert.throws(() => buildCodexThreadUri("not-a-thread"), /invalid Codex chat ID/);
+  assert.throws(() => buildCodexThreadUri("------------------------------------"), /invalid Codex chat ID/);
 });
 
 test("long and multiline titles become compact picker labels", () => {
@@ -599,6 +854,10 @@ process.stdin.on("data", (chunk) => {
 
       const chats = loadChats({ codexHome: stateRoot });
       assert.equal(chats.length, 3);
+      const archivedChats = loadChats({ codexHome: stateRoot, archived: true });
+      assert.equal(archivedChats.length, 1);
+      assert.equal(archivedChats[0].id, "00000000-0000-4000-8000-000000000004");
+      assert.equal(fs.existsSync(archivedChats[0].rollout_path), true);
       const workspace = path.join(fixtureRoot, "projects/acme-dashboard");
       const groups = organizeChats(chats, [workspace], workspaceProjectKeys([workspace]));
       assert.equal(groups.length, 2);
@@ -613,7 +872,8 @@ process.stdin.on("data", (chunk) => {
       assert.match(output, /--new-window --user-data-dir=/);
       assert.match(output, new RegExp(vscodeUserData.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
       assert.match(output, /macOS IPC socket-length limit/);
-      assert.match(output, /Do not open the synthetic chats/);
+      assert.match(output, /open the synthetic archived chat/);
+      assert.match(output, /Do not try\s+to restore it/);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
@@ -625,6 +885,6 @@ test("demo and test UUIDs use only the synthetic fixture namespace", () => {
     const source = fs.readFileSync(path.join(__dirname, "..", filename), "utf8");
     const ids = source.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi);
     assert.ok(ids?.length > 0);
-    for (const id of ids) assert.match(id, /^00000000-0000-4000-8000-00000000000[123]$/);
+    for (const id of ids) assert.match(id, /^00000000-0000-4000-8000-00000000000[1234]$/);
   }
 });
