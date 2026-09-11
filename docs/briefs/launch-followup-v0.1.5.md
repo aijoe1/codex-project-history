@@ -42,8 +42,10 @@ automated filters immediately removed it. This is a distribution failure, not a 
 The owner separately approved one Modmail appeal, which was sent September 11 at approximately
 00:38 EDT and verified by Reddit's `Message sent` confirmation. An immediate automated reply cited
 0 r/Codex comment karma as the probable removal cause and a minimum of 1 for moderator responses,
-while also claiming detailed helpful posts are exempt. Treat this as an unresolved distribution
-gate. Review cumulative signals again September 16.
+while also claiming detailed helpful posts are exempt. At approximately 00:49 EDT the removal
+banner was gone, the post appeared in the signed-in r/Codex `New` feed, and the page showed about
+1.1K views. Treat the karma response as a future moderation-access gate, not the final post state.
+Review cumulative signals again September 16.
 
 ## Manual measurement plan
 
@@ -80,16 +82,20 @@ No explicit blanket self-promotion ban appeared in the ten rules inspected; this
 approval. Rule 4 says Showcase and high-effort useful posts are exempt from its low-karma delay
 rule. Rule 5 says automated moderation can make mistakes and directs authors to Modmail.
 
-## Reddit submission r3 — filtered
+## Reddit submission r3 — initially filtered, later visible in signed-in feed
 
 The owner manually submitted the final revised copy with `Showcase` flair and the approved video
 at approximately September 10, 23:56 EDT. Reddit created the post URL but immediately reported
 that its filters removed the post. Exact copy, URL, media checksum, UI verification, and the
 measurement boundary are in [the Reddit launch attempt receipt](reddit-launch-receipt.md).
 
-Do not repost or reply again now. Participate genuinely in r/Codex first; after the account shows
-at least 1 r/Codex comment karma, recheck the original post and request human review only if it is
-still filtered.
+At the 53-minute recheck, the removal banner was gone, the post appeared in the signed-in `New`
+feed, and the page showed about 1.1K views. Logged-out public readback remains unverified.
+
+Do not repost or reply again now. The current post appears to be distributing under the detailed
+Showcase exception. Participate genuinely in r/Codex to reach at least 1 subreddit comment karma for
+future moderation access, but do not manufacture engagement or attach Project Chats promotion to
+unrelated discussions.
 
 ## Technical handoff (resolved September 9, 23:35 EDT)
 

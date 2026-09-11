@@ -1,18 +1,34 @@
 # Decision Log
 
-## 2026-09-11 - Resolve the r/Codex participation gate before further distribution `ACTIVE`
+## 2026-09-11 - Let the restored Reddit Showcase run without reposting `ACTIVE`
 
-**What:** Do not reply to Modmail or repost Project Chats yet. Participate genuinely in r/Codex
-discussions, verify that `u/nightlydaytrader` reaches at least 1 r/Codex comment karma, and then
-recheck the original post. If it remains filtered, request human review in the existing thread.
+**What:** Treat the disappearance of the removal banner, appearance in the signed-in r/Codex `New`
+feed, and approximately 1.1K displayed views as strong evidence that the detailed Showcase resumed
+distribution. Do not repost or send more Modmail. Keep public visibility bounded as unverified until
+an independent logged-out readback succeeds.
+
+**Why:** The post state changed after the initial filter and automated 0-comment-karma response.
+Reddit's own template says detailed helpful posts are allowed regardless of karma, which is
+consistent with the later feed state. The exact restoration time is unknown.
+
+**Impact:** Record 1.1K views at 00:49 EDT as the first exposure baseline, not a 53-minute growth
+measurement. Genuine community participation can improve future moderation access, but must not be
+used to manufacture engagement or promote Project Chats in unrelated threads.
+
+## 2026-09-11 - Build genuine r/Codex participation for future moderator access `ACTIVE`
+
+**What:** Do not reply to Modmail or repost Project Chats. Participate genuinely in r/Codex
+discussions and verify that `u/nightlydaytrader` reaches at least 1 r/Codex comment karma for future
+moderator access.
 
 **Why:** The immediate automated Modmail response reported 0 r/Codex comment karma, said moderators
 do not respond below 1, and identified that as the probable removal cause. It also claimed detailed
 helpful posts are exempt, so the specific filter logic remains unresolved rather than proven.
 
-**Impact:** Reddit distribution remains incomplete and has no exposure baseline. Genuine community
-participation is the next channel step; do not manufacture engagement, mass-comment, repost, or send
-another appeal merely to bypass the filter.
+**Impact:** The current post later appeared to resume distribution under the detailed-Showcase
+exception, so karma is not a prerequisite for this post's current reach. Genuine community
+participation remains the next account-health step; do not manufacture engagement, mass-comment,
+repost, or send another appeal merely to bypass the filter.
 
 ## 2026-09-10 - Appeal the filtered Reddit post before any repost `ACTIVE`
 

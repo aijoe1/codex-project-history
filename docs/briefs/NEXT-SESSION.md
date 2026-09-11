@@ -13,11 +13,12 @@ approximately 23:56 EDT, but Reddit's automated filters immediately removed it. 
 in `reddit-launch-receipt.md`. The owner separately approved one concise Modmail appeal; it was sent
 September 11 at approximately 00:38 EDT and Reddit displayed `Message sent`. The immediate automated
 response reported 0 r/Codex comment karma, said moderators do not respond below 1, and identified
-that as the probable removal cause, while also claiming detailed helpful posts are exempt. Do not
-repost, reply again, or treat the filtered attempt as demand evidence. Next channel step: genuine
-r/Codex participation; once the account displays at least 1 subreddit comment karma, recheck the
-original post and seek human review only if it remains filtered. No scheduled monitor, new post,
-reply, additional appeal, merge, or release is authorized. Start from
+that as the probable removal cause, while also claiming detailed helpful posts are exempt. At 00:49
+EDT, the removal banner was gone, the post appeared in the signed-in `New` feed, and it showed about
+1.1K views. Logged-out readback remains unavailable. Do not repost or reply again. Genuine r/Codex
+participation is the next account-health step, but it must add independent value rather than promote
+Project Chats. No scheduled monitor, new post, reply, additional appeal, merge, or release is
+authorized. Start from
 the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
 pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
 

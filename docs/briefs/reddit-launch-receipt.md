@@ -61,9 +61,19 @@ helpful posts are allowed regardless of karma.
 
 This is an automated template, not a human review or proof of the sole filter cause. Its probable
 cause and its high-detail exception are in tension because this submission was a detailed Showcase.
-The actionable gate is nevertheless clear: do not reply or repost now. Participate genuinely in
-r/Codex, verify that the account's displayed r/Codex comment karma is at least 1, then recheck the
-original post. If it remains filtered, request one human review in the existing Modmail thread.
+The response establishes a future moderation-response threshold, not a final decision on this post.
+
+## Visibility recheck
+
+At approximately 2026-09-11 00:49 EDT, 53 minutes after submission, the signed-in post page no
+longer displayed the removal banner and showed approximately 1.1K views. The post also appeared in
+the r/Codex `New` feed with its title, body preview, Showcase flair, and video. The visible score was
+0 and the only comment was the automated weekly-showcase notice.
+
+This strongly indicates that distribution resumed under the detailed-Showcase exception after the
+initial filter. It is not an independent logged-out readback: unauthenticated Reddit JSON requests
+were denied with HTTP 403 and web search had not indexed the new URL. Classify the current state as
+`VISIBLE_IN_SIGNED_IN_FEED`; public readback remains unverified. Do not repost or send more Modmail.
 
 ## Exact submitted copy, revision r3
 
@@ -100,6 +110,6 @@ Scope: synthetic grouping and filtering demo; not proof of real-chat reopening.
 
 ## Measurement boundary
 
-No Reddit measurement clock has started. If moderators restore the post, independently verify
-public visibility first and record that timestamp as the beginning of the exposure window. Keep
-the original submission time and the public-visibility time separate.
+The first visible exposure baseline is approximately 1.1K views at 00:49 EDT. The exact restoration
+time is unknown, so measure elapsed time from the original submission while preserving that the
+first 53 minutes included an initial filter. Independently verify public visibility when possible.

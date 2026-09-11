@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-11 00:49 EDT | [codex] | Rechecked the Reddit post after the automated karma response: the removal banner was gone, the post appeared in the signed-in r/Codex New feed, and the page showed about 1.1K views | Treat distribution as resumed but logged-out readback as unverified. Do not repost or send more Modmail; record 1.1K as the first exposure baseline because restoration time is unknown.
+
 2026-09-11 00:41 EDT | [codex] | Independently read the immediate `modmail-karma` response: u/nightlydaytrader has 0 r/Codex comment karma, moderators do not respond below 1, and the template says this is probably why the post was removed while also claiming detailed helpful posts are exempt | Treat the channel cause as probable, not proven. Do not reply or repost; participate genuinely, verify at least 1 subreddit comment karma, then recheck the original post.
 
 2026-09-11 00:38 EDT | [codex] | Sent the exact owner-approved Modmail appeal to r/codex moderators from u/nightlydaytrader and verified Reddit's `Message sent` confirmation | Post remains filtered unless independently verified otherwise. Do not repost or send another moderator message; next measurement remains September 16.
