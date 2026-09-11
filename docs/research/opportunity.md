@@ -130,12 +130,13 @@ now solve overlapping jobs. This is not an uncontested category.
 
 ## Results
 
-First distribution event: the approved GitHub issue reply was published on 2026-09-09 at
-02:35:58 UTC (September 8, 22:35:58 EDT). Use this as the starting point for the checkpoints
-below. No recurring monitor or scheduled task has been enabled.
+Use a separate clock for each publication. The GitHub issue reply was published September 8 at
+22:35:58 EDT; its 24-hour checkpoint was missed, so the September 10 observation is a late baseline.
+The X post was published September 9 at 21:18 EDT and reaches 24 hours September 10 at 21:18 EDT.
+No recurring monitor or scheduled task has been enabled.
 
 | Checkpoint | Observable metrics | Qualitative feedback | Decision |
 | --- | --- | --- | --- |
-| 24 hours | Release downloads, stars, issue replies, qualified questions | Classify as bug, missing use case, positioning, distribution, or noise | Pending |
+| 24 hours | GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. X interim at 22h34m: 57 views and 1 outside reply; signed-in interaction counts pending. | One qualified question about automatic history discovery; classify as positioning/onboarding. No public install result or bug report. | Await X 24-hour observation September 10 at 21:18 EDT |
 | 7 days | Cumulative downloads/stars, unique reports, resolved bugs | Identify repeated platform or install requests | Pending |
 | 30 days | Same measures with source and date | ITERATE, MAINTAIN, REPOSITION, or RETIRE | Pending |

@@ -20,7 +20,13 @@ Record visible counts and distinct useful reports. Unknowns stay unknown; downlo
 prove installations or attribution to X. No monitoring is scheduled.
 
 Early follow-up observed September 9 EDT: 15 views, 2 likes, 1 reply, 0 reposts, 0 bookmarks.
-Reply asks whether old chats are picked up automatically. No response published by the agent.
+The reply asks whether old chats are picked up automatically. The owner's response was independently
+read back on September 10 at
+https://x.com/nightlydaytrade/status/2097871379668365819. No response was published by the agent.
+
+Interim public-view observation September 10 at 19:52 EDT, 22 hours 34 minutes after publication:
+57 views and one outside reply. The logged-out view rendered zero for likes, reposts, and bookmarks,
+which conflicts with the earlier two-like observation; use a signed-in view for the 24-hour record.
 
 Reddit remains draft-only and manual submission: r/codex rule 9 prohibits bots. No further
 publication, commit, or push is authorized by this receipt.

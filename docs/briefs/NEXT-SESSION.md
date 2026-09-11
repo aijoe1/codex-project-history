@@ -51,9 +51,11 @@ monitoring without separate approval. Reddit must be submitted manually by the o
 - Reply question: https://x.com/FlorinIluta/status/2097866989708468609
   "Does it pick up old chats automatically?"
 
-## Owner-reported reply (not independently read back)
+## Owner reply (independently read back September 10, 19:52 EDT)
 
-The owner said they posted this response; do not send it again:
+Published response: https://x.com/nightlydaytrade/status/2097871379668365819
+
+Do not send this response again:
 
 > Yes, it reads existing unarchived chats created in the Codex VS Code extension automatically. No import needed.
 >

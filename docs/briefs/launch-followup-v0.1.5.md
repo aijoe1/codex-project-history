@@ -10,13 +10,23 @@ Observed approximately 22:02 EDT, 44 minutes after publication: 15 views, 2 like
 0 reposts, 0 bookmarks. Reply: https://x.com/FlorinIluta/status/2097866989708468609
 It asks whether old chats are picked up automatically. The owner subsequently reported replying
 that existing unarchived VS Code chats load automatically, current-workspace chats appear first,
-repo/branch labels distinguish projects, and the default limit is 300. This reply was not
-independently read back; do not send it again. Exact owner-reported text is in NEXT-SESSION.md.
+repo/branch labels distinguish projects, and the default limit is 300. The complete reply was
+independently read back September 10 at 19:52 EDT:
+https://x.com/nightlydaytrade/status/2097871379668365819. Do not send it again. Exact text is in
+NEXT-SESSION.md.
+
+Interim public-view observation September 10 at 19:52 EDT, 22 hours 34 minutes after publication:
+57 views and one outside reply. The logged-out view rendered zero for likes, reposts, and bookmarks,
+which conflicts with the earlier two-like observation. Treat those interaction counts as unresolved
+until the signed-in 24-hour checkpoint rather than inferring that engagement disappeared.
 
 ## Manual measurement plan
 
-Review September 10 at 21:18 EDT (24 hours), September 16 (7 days), and October 9 (30 days).
-No monitoring is scheduled. Record timestamp and elapsed time with each observation.
+The X clock starts at its September 9, 21:18 EDT publication. Review September 10 at 21:18 EDT
+(24 hours), September 16 (7 days), and October 9 (30 days). The GitHub issue-reply clock starts at
+September 8, 22:35:58 EDT; its 24-hour checkpoint was missed, so the September 10 observation is a
+late first baseline rather than 24-hour growth. No monitoring is scheduled. Record timestamp and
+elapsed time with each observation.
 
 - Record X views, likes, replies, reposts, and bookmarks from the actual post.
 - Count distinct people reporting the same problem and explicitly confirmed install successes/failures.
@@ -26,6 +36,12 @@ No monitoring is scheduled. Record timestamp and elapsed time with each observat
 - Classify feedback as bug, missing use case, positioning, distribution, or noise.
 - Prioritize reproducible failures. Low reach does not disprove demand; do not attribute all
   GitHub activity to X because the GitHub issue reply and other discovery paths also exist.
+
+## GitHub late baseline
+
+Observed September 10 at approximately 19:52 EDT, about 45 hours 16 minutes after the issue reply:
+one v0.1.5 asset download, zero stars, forks, and watchers, no repository issues, and zero reactions
+on the OpenAI issue reply. This is a late baseline with no attributable installation outcome.
 
 ## Reddit rules receipt
 
