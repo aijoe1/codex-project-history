@@ -72,6 +72,19 @@ STOREFRONT="$DEMO_ROOT/projects/storefront"
 CODEX_HOME_DIR="$DEMO_ROOT/codex-home"
 STATE_ROOT="$DEMO_ROOT/codex-state"
 
+# VS Code places its macOS IPC socket under the user-data directory and rejects socket paths
+# longer than 103 characters. TMPDIR is commonly too long, so keep this separate root under /tmp.
+if [[ -n "${CODEX_PROJECT_HISTORY_VSCODE_USER_DATA:-}" ]]; then
+  VSCODE_USER_DATA="$CODEX_PROJECT_HISTORY_VSCODE_USER_DATA"
+  if [[ -e "$VSCODE_USER_DATA" ]]; then
+    echo "CODEX_PROJECT_HISTORY_VSCODE_USER_DATA must not already exist: $VSCODE_USER_DATA" >&2
+    exit 1
+  fi
+  mkdir -p "$VSCODE_USER_DATA"
+else
+  VSCODE_USER_DATA="$(mktemp -d /tmp/cph-vscode.XXXXXX)"
+fi
+
 mkdir -p "$WORKSPACE" "$STOREFRONT" "$CODEX_HOME_DIR" "$STATE_ROOT"
 git -C "$WORKSPACE" init -q
 git -C "$WORKSPACE" remote add origin https://github.com/example/acme-dashboard.git
@@ -111,9 +124,14 @@ The official Codex runtime initialized the disposable state database:
 
 Launch an Extension Development Host with:
 OUT
-printf '  CODEX_HOME=%q CODEX_SQLITE_HOME=%q code --extensionDevelopmentPath=%q %q\n\n' \
-  "$CODEX_HOME_DIR" "$STATE_ROOT" "$REPO_ROOT" "$WORKSPACE"
+printf '  CODEX_HOME=%q CODEX_SQLITE_HOME=%q code --new-window --user-data-dir=%q --extensionDevelopmentPath=%q %q\n\n' \
+  "$CODEX_HOME_DIR" "$STATE_ROOT" "$VSCODE_USER_DATA" "$REPO_ROOT" "$WORKSPACE"
 cat <<OUT
+Use that exact command even when VS Code is already open. The short, isolated user-data directory
+keeps the demo environment separate and avoids the macOS IPC socket-length limit.
+
 Then press Control+Command+H. Do not open the synthetic chats; they have no transcripts.
-Delete the temporary demo directory when capture is complete.
+After closing the demo window, delete these temporary directories when capture is complete:
+  $DEMO_ROOT
+  $VSCODE_USER_DATA
 OUT

@@ -543,6 +543,7 @@ test(
   () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-demo-setup-test-"));
     const fixtureRoot = path.join(root, "fixture");
+    const vscodeUserData = path.join(root, "vscode-user-data");
     const fakeCodex = path.join(root, "codex");
     try {
       fs.writeFileSync(fakeCodex, `#!/usr/bin/env node
@@ -581,6 +582,7 @@ process.stdin.on("data", (chunk) => {
           ...process.env,
           CODEX_PROJECT_HISTORY_CODEX_BIN: fakeCodex,
           CODEX_PROJECT_HISTORY_DEMO_ROOT: fixtureRoot,
+          CODEX_PROJECT_HISTORY_VSCODE_USER_DATA: vscodeUserData,
         },
         encoding: "utf8",
       });
@@ -608,6 +610,9 @@ process.stdin.on("data", (chunk) => {
       ]);
       assert.match(output, /official Codex runtime initialized the disposable state database/i);
       assert.match(output, /CODEX_HOME=.*CODEX_SQLITE_HOME=/);
+      assert.match(output, /--new-window --user-data-dir=/);
+      assert.match(output, new RegExp(vscodeUserData.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+      assert.match(output, /macOS IPC socket-length limit/);
       assert.match(output, /Do not open the synthetic chats/);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });

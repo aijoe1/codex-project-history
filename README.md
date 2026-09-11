@@ -46,9 +46,10 @@ separate control provided by this extension.
 
 ## Privacy and compatibility
 
-The extension reads only unarchived user chats created by the VS Code Codex extension. It honors
-`CODEX_SQLITE_HOME`, then `CODEX_HOME`, and otherwise checks the newest compatible
-`~/.codex/state_*.sqlite` database.
+The extension automatically reads existing unarchived user chats created by the VS Code Codex
+extension; no import is needed. It shows up to 300 recent chats by default, configurable through
+`codexProjectHistory.maxChats`. It honors `CODEX_SQLITE_HOME`, then `CODEX_HOME`, and otherwise
+checks the newest compatible `~/.codex/state_*.sqlite` database.
 
 Active databases use SQLite's normal read-only path so WAL changes remain visible. If SQLite
 reports `CANTOPEN` while both WAL sidecars are absent, the extension retries once as an immutable,

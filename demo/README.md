@@ -4,7 +4,9 @@ Run `bash demo/setup-fixture.sh`. It locates the Codex binary bundled with the i
 OpenAI extension, asks that runtime to initialize a complete database under a temporary Codex
 home, and only then inserts fictional repositories, chat titles, and synthetic IDs. It prints an
 isolated VS Code launch command that sets both `CODEX_HOME` and `CODEX_SQLITE_HOME`; it never reads
-or writes your normal Codex database.
+or writes your normal Codex database. The command also uses a separate, short `/tmp` user-data
+directory. Use the exact printed command even if VS Code is already open: this ensures the fixture
+environment reaches the new process and avoids VS Code's macOS IPC socket-path limit.
 
 The demo requires the VS Code `code` command, the official OpenAI Codex extension, Node.js, and
 `/usr/bin/sqlite3`. For automated or nonstandard installations, set
@@ -20,4 +22,5 @@ Capture an 8 to 15 second clip:
 5. End on: `Local. Read-only. Project-aware.`
 
 Before sharing, inspect every frame for usernames, notifications, tabs, private repository names,
-or local paths. The fixture path under the system temporary directory is safe to show.
+or local paths. The fixture path under the system temporary directory is safe to show. Close the
+demo window before deleting both temporary directories printed by the setup script.
