@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-11 00:38 EDT | [codex] | Sent the exact owner-approved Modmail appeal to r/codex moderators from u/nightlydaytrader and verified Reddit's `Message sent` confirmation | Post remains filtered unless independently verified otherwise. Do not repost or send another moderator message; next measurement remains September 16.
+
 2026-09-10 23:57 EDT | [codex] | Verified the owner-manual r/codex submission, exact r3 copy, Showcase flair, 11-second demo, and permanent URL; Reddit's automated filters immediately removed the post; recorded a launch-attempt receipt and kept the MAINTAIN decision | Do not interpret Reddit reach or repost. Recommended next external action is one separately approved Modmail appeal; X/GitHub review remains September 16.
 
 2026-09-10 23:34 EDT | [codex] | Captured the signed-in X checkpoint late at 26h16m: 59 impressions, 7 engagements, 1 link click, 22 unique video views, one qualified onboarding question, and no verified public install or bug; refreshed GitHub at 1 download and 0 stars/issues/reactions; updated README and launch records with a MAINTAIN decision | Exact-head CI and separate approval remain required before merging PR #2. Optional r/codex draft is manual-only and separately gated; next measurement September 16.

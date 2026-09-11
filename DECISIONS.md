@@ -10,9 +10,10 @@ the post. The final copy was detailed, used `Showcase` flair, disclosed authorsh
 manually. The subreddit itself says its moderator bot can make mistakes and directs authors to
 Modmail. The specific filter reason remains unknown.
 
-**Impact:** Do not infer demand from Reddit reach, start a Reddit measurement clock, or repost the
-same content. An appeal is a separate external-message approval. If the post becomes public, record
-the first verified visibility time separately from its original submission time.
+**Impact:** The owner separately approved the exact appeal, which was sent September 11 at
+approximately 00:38 EDT. Do not infer demand from Reddit reach, start a Reddit measurement clock,
+repost the same content, or send another moderator message. If the post becomes public, record the
+first verified visibility time separately from its original submission time.
 
 ## 2026-09-10 - Maintain the shipped wedge and test distribution separately `ACTIVE`
 

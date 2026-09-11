@@ -25,7 +25,31 @@ Rule 5 says r/codex moderation is partly automated, acknowledges that the modera
 mistakes, and directs authors to Modmail when that happens. Rule 4 says Showcase and high-effort
 useful posts are not subject to its low-comment-karma delay rule. Those rules do not reveal why
 this post was filtered. Recommended next action: send one concise Modmail appeal; do not repost or
-change channels until the moderators respond or the post becomes publicly visible.
+change channels until the moderators respond or the post becomes publicly visible. The owner
+subsequently approved the exact appeal below, and it was sent September 11 at approximately
+00:38 EDT.
+
+## Modmail appeal receipt
+
+Destination: r/codex moderators
+
+Sender: `u/nightlydaytrader`
+
+Sent: approximately 2026-09-11 00:38 EDT
+
+Subject: **Showcase post removed by automated filters**
+
+> Hi mods — my r/codex Showcase post was automatically removed immediately after submission:
+> https://www.reddit.com/r/codex/comments/1wd5b35/
+>
+> It’s a detailed post about an open-source VS Code utility I built for organizing Codex chats by
+> project. I disclosed that I’m the author, used the Showcase flair, submitted manually, and
+> reviewed the subreddit rules beforehand.
+>
+> Would you please review whether it can be approved? I won’t repost while waiting. Thanks.
+
+The Reddit UI displayed `Message sent` and cleared the form after submission. No additional
+message, repost, or moderator response has been sent or observed.
 
 ## Exact submitted copy, revision r3
 
@@ -47,7 +71,7 @@ and relies on undocumented Codex internals that could change.
 I tested it across my workspaces and on a second Mac. The attached demo uses fictional chats to
 show grouping and filtering, not real-chat reopening.
 
-If you try it, I'd love to know: does it correctly put the project you're currently working in at
+If you try it, I’d love to know: does it correctly put the project you’re currently working in at
 the top?
 
 If you share a screenshot, please blur private paths and chat titles.

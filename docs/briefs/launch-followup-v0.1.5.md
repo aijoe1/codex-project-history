@@ -39,7 +39,8 @@ approximately 1.7%, but the 59-impression sample is too small for a product conc
 Decision: `MAINTAIN`. Do not change product scope or pay to promote this post from this result.
 The owner manually attempted the r/codex distribution experiment on September 10, but Reddit's
 automated filters immediately removed it. This is a distribution failure, not a demand result.
-Recommended next action is one separately approved Modmail appeal. Review cumulative signals again
+The owner separately approved one Modmail appeal, which was sent September 11 at approximately
+00:38 EDT and verified by Reddit's `Message sent` confirmation. Review cumulative signals again
 September 16.
 
 ## Manual measurement plan
@@ -84,7 +85,7 @@ at approximately September 10, 23:56 EDT. Reddit created the post URL but immedi
 that its filters removed the post. Exact copy, URL, media checksum, UI verification, and the
 measurement boundary are in [the Reddit launch attempt receipt](reddit-launch-receipt.md).
 
-Do not repost. A Modmail appeal remains unapproved and unsent.
+Do not repost. One Modmail appeal was sent; no additional moderator message is approved.
 
 ## Technical handoff (resolved September 9, 23:35 EDT)
 
@@ -101,4 +102,4 @@ not repaired. No editor reload, permission change, or binary replacement was per
 
 Launch and shared records have been reconciled; consult Git for their commit status.
 Do not reinstall Project Chats or restore obsolete executable paths as a workaround.
-No monitoring, replies, repost, Modmail appeal, push, or paid promotion is authorized.
+No monitoring, replies, repost, additional Modmail message, push, or paid promotion is authorized.
