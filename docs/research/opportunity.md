@@ -4,11 +4,12 @@ Status: SHIPPED — FOLLOW_UP
 Owner: Joseph Yu
 First observed: 2026-09-02
 Research last checked: 2026-09-08 (historical evidence, not refreshed by the wrapup)
-Distribution updated: 2026-09-10; GitHub and X published, Reddit manual-only and unpublished.
-Current receipts: `../briefs/x-launch-receipt.md` and `../briefs/launch-followup-v0.1.5.md`.
+Distribution updated: 2026-09-10; GitHub and X published, Reddit submitted manually then filtered.
+Current receipts: `../briefs/x-launch-receipt.md`, `../briefs/reddit-launch-receipt.md`, and
+`../briefs/launch-followup-v0.1.5.md`.
 Decision: BUILD AND SHARE
-Follow-up decision: MAINTAIN; next measurement September 16, optional manual Reddit test requires
-separate approval.
+Follow-up decision: MAINTAIN; next measurement September 16. The Reddit test produced no exposure
+result because automated filters removed it; a Modmail appeal requires separate approval.
 Score: 79/100
 
 ## Problem
@@ -127,7 +128,7 @@ now solve overlapping jobs. This is not an uncontested category.
 | Channel | Native angle | Draft revision | Approval | URL/status |
 | --- | --- | --- | --- | --- |
 | OpenAI issue #25319 | Useful affiliation-disclosed implementation reply | `launch-packet-v0.1.5-r1` | Exact draft approved by owner | [Published and read back](https://github.com/openai/codex/issues/25319#issuecomment-5594914552), 2026-09-09 02:35:58 UTC |
-| r/codex | Firsthand workflow fix with limits | Follow-up r2 | Owner review/manual submission; September 9 rules receipt recorded | Draft only |
+| r/codex | Firsthand workflow fix with limits | Follow-up r3 | Owner submitted manually after reviewing copy, flair, and rules | [Filtered immediately after submission](../briefs/reddit-launch-receipt.md); Modmail appeal not sent |
 | X | Question-led workflow friction plus status-bar clip | Selected option 1; exact copy in X receipt | Owner approved copy and final video | [Published September 9, 21:18 EDT](https://x.com/nightlydaytrade/status/2097857090358329527) |
 
 ## Results
@@ -139,6 +140,6 @@ No recurring monitor or scheduled task has been enabled.
 
 | Checkpoint | Observable metrics | Qualitative feedback | Decision |
 | --- | --- | --- | --- |
-| 24 hours | Captured late at 26h16m: X 59 impressions, 7 engagements, 2 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts/bookmarks; video 22 unique/23 total views with 39% retention at 11 seconds. GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. | One qualified question about automatic history discovery, classified as positioning/onboarding and answered in README. No public install result or bug report. Sample too small for a product conclusion. | MAINTAIN; optional manual Reddit distribution test, then review September 16 |
+| 24 hours | Captured late at 26h16m: X 59 impressions, 7 engagements, 2 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts/bookmarks; video 22 unique/23 total views with 39% retention at 11 seconds. GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. Reddit was manually submitted afterward but immediately filtered, so it has no exposure baseline. | One qualified question about automatic history discovery, classified as positioning/onboarding and answered in README. No public install result or bug report. Reddit filtering is a distribution outcome, not demand evidence. Sample too small for a product conclusion. | MAINTAIN; consider one Modmail appeal, then review September 16 |
 | 7 days | Cumulative downloads/stars, unique reports, resolved bugs | Identify repeated platform or install requests | Pending |
 | 30 days | Same measures with source and date | ITERATE, MAINTAIN, REPOSITION, or RETIRE | Pending |

@@ -4,8 +4,9 @@ Draft revision: `launch-packet-v0.1.5-r1`
 Prepared: 2026-09-08
 Status updated 2026-09-10: GitHub reply and X launch published after separate approvals; the first
 X checkpoint was captured late at 26 hours 16 minutes with a `MAINTAIN` decision.
-The final status-bar video was approved and published with X. Reddit remains unpublished and
-manual-only. See [X receipt](x-launch-receipt.md) and [current follow-up](launch-followup-v0.1.5.md).
+The final status-bar video was approved and published with X. The owner manually submitted the
+Reddit post, but Reddit's automated filters immediately removed it. See the [X receipt](x-launch-receipt.md),
+[Reddit attempt receipt](reddit-launch-receipt.md), and [current follow-up](launch-followup-v0.1.5.md).
 The original drafts and proposed order below are historical, not outstanding publication tasks.
 
 ## Recommendation
@@ -128,5 +129,5 @@ deploy.`
 
 The GitHub reply above and the separately approved question-led X post are already published.
 The historical X copy above was not the selected copy; use x-launch-receipt.md for the exact post.
-Do not post either again. Reddit uses the newer r2 draft in launch-followup-v0.1.5.md and requires
-owner review and manual submission. Further posts or replies require separate approval.
+Do not post either again. The owner manually submitted Reddit revision r3, but Reddit filtered it;
+do not repost. A Modmail appeal and any further post or reply require separate approval.

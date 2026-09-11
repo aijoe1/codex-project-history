@@ -37,8 +37,10 @@ default limit is 300. The derived engagement rate is approximately 11.9% and the
 approximately 1.7%, but the 59-impression sample is too small for a product conclusion.
 
 Decision: `MAINTAIN`. Do not change product scope or pay to promote this post from this result.
-Keep the manual r/codex draft as the next optional distribution experiment, requiring separate
-exact approval, and review cumulative signals again September 16.
+The owner manually attempted the r/codex distribution experiment on September 10, but Reddit's
+automated filters immediately removed it. This is a distribution failure, not a demand result.
+Recommended next action is one separately approved Modmail appeal. Review cumulative signals again
+September 16.
 
 ## Manual measurement plan
 
@@ -56,6 +58,7 @@ elapsed time with each observation.
 - Classify feedback as bug, missing use case, positioning, distribution, or noise.
 - Prioritize reproducible failures. Low reach does not disprove demand; do not attribute all
   GitHub activity to X because the GitHub issue reply and other discovery paths also exist.
+- Do not start a Reddit measurement clock unless public visibility is independently confirmed.
 
 ## GitHub late baseline
 
@@ -66,37 +69,22 @@ on the OpenAI issue reply. This is a late baseline with no attributable installa
 
 ## Reddit rules receipt
 
-Read the rendered logged-in https://www.reddit.com/r/codex/about/rules/ on September 9 EDT.
+Read the rendered logged-in https://www.reddit.com/r/codex/about/rules/ on September 9 EDT and
+rechecked the relevant rules after the September 10 submission.
 Rules 2/3 require relevant detailed content; rule 7 asks to check existing posts; rule 8 requires
-appropriate flair; rule 9 says "Don't use bots." Owner should review and submit manually.
+appropriate flair; rule 9 says "Don't use bots." The owner submitted manually.
 No explicit blanket self-promotion ban appeared in the ten rules inspected; this is not moderator
-approval. Recheck recent similar posts, available showcase flair, and submit-time rules before posting.
+approval. Rule 4 says Showcase and high-effort useful posts are exempt from its low-karma delay
+rule. Rule 5 says automated moderation can make mistakes and directs authors to Modmail.
 
-## Reddit draft r2 — unpublished
+## Reddit submission r3 — filtered
 
-Title: **I built a project-first chat picker for Codex in VS Code (macOS, open source)**
+The owner manually submitted the final revised copy with `Showcase` flair and the approved video
+at approximately September 10, 23:56 EDT. Reddit created the post URL but immediately reported
+that its filters removed the post. Exact copy, URL, media checksum, UI verification, and the
+measurement boundary are in [the Reddit launch attempt receipt](reddit-launch-receipt.md).
 
-I use Codex across several VS Code projects. Finding an older chat meant opening threads one by
-one to figure out which repo they belonged to.
-
-I built Project Chats to make that easier. Click **Project Chats** in the status bar or press
-**Control+Command+H**. It groups chats by repo, puts the current workspace first, and shows the
-branch and working directory before you open a thread.
-
-I am the author. Source and installation instructions:
-https://github.com/aijoe1/codex-project-history
-
-It reads local metadata without modifying chat history. It is macOS-only, installs through GitHub,
-and relies on undocumented Codex internals that could change.
-
-I tested it across my workspaces and on a second Mac. The attached demo uses fictional chats to
-show grouping and filtering, not real-chat reopening.
-
-If you use multi-root workspaces or Git worktrees, does it put the right project first? Please
-remove private paths and chat titles from screenshots or diagnostics.
-
-Attachment if owner submits: ../media/project-chats-button-demo-pullback-v0.1.5.mp4.
-No Reddit upload or submission performed. Test statements above are owner-reported.
+Do not repost. A Modmail appeal remains unapproved and unsent.
 
 ## Technical handoff (resolved September 9, 23:35 EDT)
 
@@ -113,4 +101,4 @@ not repaired. No editor reload, permission change, or binary replacement was per
 
 Launch and shared records have been reconciled; consult Git for their commit status.
 Do not reinstall Project Chats or restore obsolete executable paths as a workaround.
-No monitoring, replies, new publication, push, or paid promotion is authorized.
+No monitoring, replies, repost, Modmail appeal, push, or paid promotion is authorized.

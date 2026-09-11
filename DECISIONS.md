@@ -1,5 +1,19 @@
 # Decision Log
 
+## 2026-09-10 - Appeal the filtered Reddit post before any repost `ACTIVE`
+
+**What:** Treat the manually submitted r/codex post as a filtered launch attempt, not a completed
+distribution test. Recommend one concise Modmail appeal before considering another Reddit post.
+
+**Why:** Reddit created the post URL but immediately displayed that its automated filters removed
+the post. The final copy was detailed, used `Showcase` flair, disclosed authorship, and was submitted
+manually. The subreddit itself says its moderator bot can make mistakes and directs authors to
+Modmail. The specific filter reason remains unknown.
+
+**Impact:** Do not infer demand from Reddit reach, start a Reddit measurement clock, or repost the
+same content. An appeal is a separate external-message approval. If the post becomes public, record
+the first verified visibility time separately from its original submission time.
+
 ## 2026-09-10 - Maintain the shipped wedge and test distribution separately `ACTIVE`
 
 **What:** Keep Project Chats v0.1.5 unchanged after the first X follow-up. Treat the prepared

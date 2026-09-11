@@ -1,20 +1,18 @@
 # Continue Project Chats after requested wrapup
 
-## Reconciliation update — September 10, 2026, 23:34 EDT
+## Reconciliation update — September 10, 2026, 23:57 EDT
 
-Shared records and historical launch/capture gates have been reconciled. The two local wrapup
-commits were pushed, then merged with the current `origin/main` in an isolated worktree to resolve
-the duplicate v0.1.5 release-history conflict. Pull request #2 is open at
-https://github.com/aijoe1/codex-project-history/pull/2. The old pending steps below are retained as
-provenance, not instructions to repeat completed work. The earlier temporary worktree and its two
-untracked alternate video exports no longer exist; the approved pullback video remains tracked.
+Shared records and historical launch/capture gates have been reconciled. Pull request #2 was merged
+as `5c225f98c404b4d6c22b1b2a4c9c0533270fb46c`. The old pending steps below are retained as provenance,
+not instructions to repeat completed work. The approved pullback video remains tracked.
 
 The late first X checkpoint is complete: 59 impressions, 7 engagements, 1 link click, 22 unique
 video views, and one qualified onboarding question, with no verified public install or bug report.
-Decision: `MAINTAIN`; review again September 16. Next: after all checks pass on the exact
-pull-request head, request a separate decision before merging pull request #2. The optional r/codex
-draft also requires separate exact approval and manual submission. No scheduled monitor, new post,
-reply, Reddit submission, merge, or release is authorized. Start from
+Decision: `MAINTAIN`; review again September 16. The owner manually submitted Reddit revision r3 at
+approximately 23:56 EDT, but Reddit's automated filters immediately removed it. The exact receipt is
+in `reddit-launch-receipt.md`. Next recommended external action is one concise Modmail appeal; it is
+not approved or sent. Do not repost, and do not treat the filtered attempt as demand evidence. No
+scheduled monitor, new post, reply, appeal, merge, or release is authorized. Start from
 the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
 pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
 
