@@ -20,10 +20,30 @@ Interim public-view observation September 10 at 19:52 EDT, 22 hours 34 minutes a
 which conflicts with the earlier two-like observation. Treat those interaction counts as unresolved
 until the signed-in 24-hour checkpoint rather than inferring that engagement disappeared.
 
+## Late 24-hour X checkpoint
+
+Observed in signed-in X analytics September 10 at 23:34 EDT, 26 hours 16 minutes after publication:
+
+- 59 impressions, 7 engagements, 2 detail expands, 0 profile visits, and 1 link click;
+- 2 likes, 1 outside reply, 0 reposts, and 0 visible bookmarks;
+- 22 unique video views and 23 total video views; and
+- audience retention of 96% at 2 seconds, 70% at 5 seconds, 43% at 8 seconds, and 39% at the
+  11-second ending.
+
+The owner's answer had 12 views and 1 like. There were no additional questions, public install
+confirmations, failures, or bugs. The one outside question is `positioning/onboarding` feedback;
+the README now states that existing unarchived chats load automatically without import and that the
+default limit is 300. The derived engagement rate is approximately 11.9% and the link-click rate is
+approximately 1.7%, but the 59-impression sample is too small for a product conclusion.
+
+Decision: `MAINTAIN`. Do not change product scope or pay to promote this post from this result.
+Keep the manual r/codex draft as the next optional distribution experiment, requiring separate
+exact approval, and review cumulative signals again September 16.
+
 ## Manual measurement plan
 
-The X clock starts at its September 9, 21:18 EDT publication. Review September 10 at 21:18 EDT
-(24 hours), September 16 (7 days), and October 9 (30 days). The GitHub issue-reply clock starts at
+The X clock starts at its September 9, 21:18 EDT publication. The first checkpoint was captured
+late at 26 hours 16 minutes; review again September 16 (7 days) and October 9 (30 days). The GitHub issue-reply clock starts at
 September 8, 22:35:58 EDT; its 24-hour checkpoint was missed, so the September 10 observation is a
 late first baseline rather than 24-hour growth. No monitoring is scheduled. Record timestamp and
 elapsed time with each observation.
@@ -39,7 +59,8 @@ elapsed time with each observation.
 
 ## GitHub late baseline
 
-Observed September 10 at approximately 19:52 EDT, about 45 hours 16 minutes after the issue reply:
+Observed September 10 at approximately 19:52 EDT, about 45 hours 16 minutes after the issue reply,
+and refreshed at 23:34 EDT with no change:
 one v0.1.5 asset download, zero stars, forks, and watchers, no repository issues, and zero reactions
 on the OpenAI issue reply. This is a late baseline with no attributable installation outcome.
 

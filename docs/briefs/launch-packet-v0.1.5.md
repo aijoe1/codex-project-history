@@ -2,7 +2,8 @@
 
 Draft revision: `launch-packet-v0.1.5-r1`
 Prepared: 2026-09-08
-Status updated 2026-09-09: GitHub reply and X launch published after separate approvals.
+Status updated 2026-09-10: GitHub reply and X launch published after separate approvals; the first
+X checkpoint was captured late at 26 hours 16 minutes with a `MAINTAIN` decision.
 The final status-bar video was approved and published with X. Reddit remains unpublished and
 manual-only. See [X receipt](x-launch-receipt.md) and [current follow-up](launch-followup-v0.1.5.md).
 The original drafts and proposed order below are historical, not outstanding publication tasks.

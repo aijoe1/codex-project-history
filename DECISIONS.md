@@ -1,5 +1,19 @@
 # Decision Log
 
+## 2026-09-10 - Maintain the shipped wedge and test distribution separately `ACTIVE`
+
+**What:** Keep Project Chats v0.1.5 unchanged after the first X follow-up. Treat the prepared
+manual r/codex post as the next optional distribution experiment, subject to a separate exact
+publication approval, and wait for the 7-day checkpoint before reconsidering product scope.
+
+**Why:** The late 24-hour X observation produced one qualified onboarding question, one link click,
+and usable video retention, but only 59 impressions and no verified public install, failure, or bug
+report. The sample is too small to support either a feature pivot or a demand rejection.
+
+**Impact:** The README now answers the surfaced import question. No new feature, paid promotion,
+reply, or cross-post is authorized by this decision. Continue channel-specific measurement and keep
+GitHub downloads separate from attributable installations.
+
 ## 2026-09-09 - X launch followed by evidence-led, manual Reddit distribution `ACTIVE`
 
 **What:** Published the explicitly approved question-led X post and synthetic status-bar demo;

@@ -1,12 +1,14 @@
 # Project-aware Codex chat history
 
-Status: SHIPPED
+Status: SHIPPED — FOLLOW_UP
 Owner: Joseph Yu
 First observed: 2026-09-02
 Research last checked: 2026-09-08 (historical evidence, not refreshed by the wrapup)
-Distribution updated: 2026-09-09; GitHub and X published, Reddit manual-only and unpublished.
+Distribution updated: 2026-09-10; GitHub and X published, Reddit manual-only and unpublished.
 Current receipts: `../briefs/x-launch-receipt.md` and `../briefs/launch-followup-v0.1.5.md`.
 Decision: BUILD AND SHARE
+Follow-up decision: MAINTAIN; next measurement September 16, optional manual Reddit test requires
+separate approval.
 Score: 79/100
 
 ## Problem
@@ -137,6 +139,6 @@ No recurring monitor or scheduled task has been enabled.
 
 | Checkpoint | Observable metrics | Qualitative feedback | Decision |
 | --- | --- | --- | --- |
-| 24 hours | GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. X interim at 22h34m: 57 views and 1 outside reply; signed-in interaction counts pending. | One qualified question about automatic history discovery; classify as positioning/onboarding. No public install result or bug report. | Await X 24-hour observation September 10 at 21:18 EDT |
+| 24 hours | Captured late at 26h16m: X 59 impressions, 7 engagements, 2 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts/bookmarks; video 22 unique/23 total views with 39% retention at 11 seconds. GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. | One qualified question about automatic history discovery, classified as positioning/onboarding and answered in README. No public install result or bug report. Sample too small for a product conclusion. | MAINTAIN; optional manual Reddit distribution test, then review September 16 |
 | 7 days | Cumulative downloads/stars, unique reports, resolved bugs | Identify repeated platform or install requests | Pending |
 | 30 days | Same measures with source and date | ITERATE, MAINTAIN, REPOSITION, or RETIRE | Pending |

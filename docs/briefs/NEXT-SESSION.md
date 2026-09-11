@@ -1,6 +1,6 @@
 # Continue Project Chats after requested wrapup
 
-## Reconciliation update — September 10, 2026, 19:49 EDT
+## Reconciliation update — September 10, 2026, 23:34 EDT
 
 Shared records and historical launch/capture gates have been reconciled. The two local wrapup
 commits were pushed, then merged with the current `origin/main` in an isolated worktree to resolve
@@ -9,9 +9,12 @@ https://github.com/aijoe1/codex-project-history/pull/2. The old pending steps be
 provenance, not instructions to repeat completed work. The earlier temporary worktree and its two
 untracked alternate video exports no longer exist; the approved pullback video remains tracked.
 
-Next: after all checks pass on the exact pull-request head, request a separate decision before
-merging pull request #2. Review X feedback at the manual September 10, 21:18 EDT checkpoint. No
-scheduled monitor, new post, reply, Reddit submission, merge, or release is authorized. Start from
+The late first X checkpoint is complete: 59 impressions, 7 engagements, 1 link click, 22 unique
+video views, and one qualified onboarding question, with no verified public install or bug report.
+Decision: `MAINTAIN`; review again September 16. Next: after all checks pass on the exact
+pull-request head, request a separate decision before merging pull request #2. The optional r/codex
+draft also requires separate exact approval and manual submission. No scheduled monitor, new post,
+reply, Reddit submission, merge, or release is authorized. Start from
 the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
 pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
 
