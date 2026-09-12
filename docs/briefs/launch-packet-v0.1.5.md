@@ -2,7 +2,7 @@
 
 Draft revision: `launch-packet-v0.1.5-r1`
 Prepared: 2026-09-08
-Status updated 2026-09-10: GitHub reply and X launch published after separate approvals; the first
+Status updated 2026-09-12: GitHub reply and X launch published after separate approvals; the first
 X checkpoint was captured late at 26 hours 16 minutes with a `MAINTAIN` decision.
 The final status-bar video was approved and published with X. The owner manually submitted the
 Reddit post, but Reddit's automated filters immediately removed it. See the [X receipt](x-launch-receipt.md),
@@ -12,8 +12,9 @@ The automated response cited 0 r/Codex comment karma as the probable removal cau
 moderation team responds only after the account reaches at least 1, despite also claiming detailed
 helpful posts are exempt.
 At approximately 00:49 EDT, the signed-in removal banner had disappeared, the post appeared in the
-r/Codex `New` feed, and the page showed about 1.1K views. Independent logged-out readback remains
-unverified.
+r/Codex `New` feed, and the page showed about 1.1K views. The late Reddit 24-hour check showed
+4.5K signed-in views but no independent user comments or confirmed installs. Chrome Incognito hit
+Reddit's humanity CAPTCHA, so independent logged-out readback remains unverified.
 The original drafts and proposed order below are historical, not outstanding publication tasks.
 
 ## Recommendation

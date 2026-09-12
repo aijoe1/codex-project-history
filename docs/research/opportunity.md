@@ -4,9 +4,9 @@ Status: SHIPPED — FOLLOW_UP
 Owner: Joseph Yu
 First observed: 2026-09-02
 Research last checked: 2026-09-08 (historical evidence, not refreshed by the wrapup)
-Distribution updated: 2026-09-11; GitHub and X published, Reddit submitted manually then filtered,
+Distribution updated: 2026-09-12; GitHub and X published, Reddit submitted manually then filtered,
 one Modmail appeal sent, an automated 0-comment-karma response received, and the post later visible
-in the signed-in `New` feed with approximately 1.1K views.
+in the signed-in `New` feed. Its late 24-hour check showed 4.5K views but no user comments.
 Current receipts: `../briefs/x-launch-receipt.md`, `../briefs/reddit-launch-receipt.md`, and
 `../briefs/launch-followup-v0.1.5.md`.
 Decision: BUILD AND SHARE
@@ -131,7 +131,7 @@ now solve overlapping jobs. This is not an uncontested category.
 | Channel | Native angle | Draft revision | Approval | URL/status |
 | --- | --- | --- | --- | --- |
 | OpenAI issue #25319 | Useful affiliation-disclosed implementation reply | `launch-packet-v0.1.5-r1` | Exact draft approved by owner | [Published and read back](https://github.com/openai/codex/issues/25319#issuecomment-5594914552), 2026-09-09 02:35:58 UTC |
-| r/codex | Firsthand workflow fix with limits | Follow-up r3 | Owner submitted manually after reviewing copy, flair, and rules | [Initially filtered, then visible in signed-in New feed](../briefs/reddit-launch-receipt.md) with about 1.1K views; logged-out readback pending |
+| r/codex | Firsthand workflow fix with limits | Follow-up r3 | Owner submitted manually after reviewing copy, flair, and rules | [Initially filtered, then visible in signed-in New feed](../briefs/reddit-launch-receipt.md) with 4.5K views at the late 24-hour check; logged-out readback pending |
 | X | Question-led workflow friction plus status-bar clip | Selected option 1; exact copy in X receipt | Owner approved copy and final video | [Published September 9, 21:18 EDT](https://x.com/nightlydaytrade/status/2097857090358329527) |
 
 ## Results
@@ -144,5 +144,6 @@ No recurring monitor or scheduled task has been enabled.
 | Checkpoint | Observable metrics | Qualitative feedback | Decision |
 | --- | --- | --- | --- |
 | 24 hours | Captured late at 26h16m: X 59 impressions, 7 engagements, 2 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts/bookmarks; video 22 unique/23 total views with 39% retention at 11 seconds. GitHub late baseline: 1 v0.1.5 download, 0 stars/forks/watchers, 0 repository issues, 0 issue-reply reactions. Reddit was initially filtered, then showed about 1.1K views and appeared in the signed-in New feed 53 minutes after submission. | One qualified question about automatic history discovery, classified as positioning/onboarding and answered in README. No public install result or bug report. Reddit's 1.1K views are a first exposure baseline because exact restoration time and logged-out visibility remain unknown. Sample still too small for a product conclusion. | MAINTAIN; let the Reddit post run, participate genuinely, then review September 16 |
+| Reddit 24 hours, late | September 12 at 13:37 EDT, 37h41m after submission: 4.5K signed-in views, score 0, one repost, and only an automated moderator comment. X: 68 impressions, 13 engagements, 1 link click. GitHub: one v0.1.5 download, 0 stars/forks/watchers/issues and 0 issue-reply reactions. | No independent user comment, confirmed public installation, or bug report. Incognito readback hit Reddit's humanity CAPTCHA, so logged-out visibility remains unverified. Exposure is not adoption. | MAINTAIN; review September 16; weekly showcase requires separate approval |
 | 7 days | Cumulative downloads/stars, unique reports, resolved bugs | Identify repeated platform or install requests | Pending |
 | 30 days | Same measures with source and date | ITERATE, MAINTAIN, REPOSITION, or RETIRE | Pending |

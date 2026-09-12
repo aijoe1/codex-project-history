@@ -30,9 +30,9 @@ EDT, the removal banner was gone, the post appeared in the signed-in `New` feed,
 1.1K views. Logged-out readback remains unavailable. Do not repost or reply again. Genuine r/Codex
 participation is the next account-health step, but it must add independent value rather than promote
 Project Chats. No scheduled monitor, new post, reply, additional appeal, merge, or release is
-authorized. Start from
-the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
-pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
+authorized. Start from the canonical Project Chats checkout, fetch before relying on branch or
+pull-request state, and review the latest HANDOFF-INDEX.md and Git status first. Do not publish
+private local paths in this public repository.
 
 The initial snapshot was recorded September 9, 2026, 22:21 EDT. This updated reconciliation is
 the authoritative continuation snapshot; older launch-packet and HANDOFF-INDEX status lines are
@@ -42,8 +42,8 @@ historical and not current.
 
 Do not follow this section as current instructions; it records the state before pull request #2.
 
-Continue the Project Chats launch in `/private/tmp/codex-project-history-v015`, branch
-`codex/timeout-terminal-v015`. Do not work in Peptide Portal (the previous session's unrelated cwd).
+Continue the Project Chats launch in the former isolated v0.1.5 worktree, branch
+`codex/timeout-terminal-v015`. Do not work in an unrelated project checkout.
 Read AGENTS.md, this file, x-launch-receipt.md, and launch-followup-v0.1.5.md first.
 
 First verify that existing-file apply_patch works after restarting the affected Codex/editor
