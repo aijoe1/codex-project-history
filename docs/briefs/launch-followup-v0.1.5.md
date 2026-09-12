@@ -97,6 +97,36 @@ Showcase exception. Participate genuinely in r/Codex to reach at least 1 subredd
 future moderation access, but do not manufacture engagement or attach Project Chats promotion to
 unrelated discussions.
 
+## Late Reddit 24-hour checkpoint — September 12
+
+Observed September 12 at approximately 13:37 EDT, about 37 hours 41 minutes after the original
+September 10, 23:56 EDT submission. The signed-in Reddit post displayed 4.5K views, score 0,
+one repost, and one comment. That sole comment was the locked, stickied, automated moderator
+notice about the weekly showcase; there were no independent user comments, public install
+confirmations, or bug reports. Views rose from about 1.9K at the September 11 02:15 EDT check,
+but view count alone is exposure, not adoption or validated demand. The initial filtered period
+and unknown restoration time remain part of this measurement.
+
+A separate Chrome Incognito readback reached Reddit's `Prove your humanity` CAPTCHA, so
+logged-out public visibility is still unverified. No challenge was completed and no repost,
+reply, or additional Modmail message was sent.
+
+The unrelated, helpful r/Codex participation comment was independently read back September 11
+at score 2, one net vote above Reddit's default self-vote. This supports genuine outside
+engagement, but exact subreddit comment karma and moderator eligibility remain unverified.
+Comment: https://www.reddit.com/r/codex/comments/1wd56ig/comment/p93ix9a/
+
+Decision remains `MAINTAIN`: keep the shipped picker unchanged and wait for qualitative feedback.
+The next combined X/GitHub review is September 16. The weekly r/Codex showcase on
+September 15–16 is an optional distribution test, not yet approved for submission.
+
+At the same September 12 check, signed-in X analytics showed 68 impressions, 13 engagements,
+8 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts,
+23 unique video views, and 26 total video views. Retention at the 11-second end was 42%.
+The OpenAI issue reply still had zero reactions. GitHub showed one v0.1.5 asset download,
+zero stars, forks, watchers, and repository issues. None of these counts proves an install
+or attributes traffic to a particular channel.
+
 ## Technical handoff (resolved September 9, 23:35 EDT)
 
 An existing-file apply_patch to DECISIONS.md now succeeded and was read back in the Git diff.

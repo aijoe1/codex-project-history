@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-12 13:39 EDT | [codex] | Captured the late Reddit checkpoint (4.5K signed-in views, no user comments), X (68 impressions, 13 engagements, 1 link click), and unchanged GitHub release baseline; Incognito public readback hit Reddit's CAPTCHA | MAINTAIN; no new post or product change. Review September 16; weekly showcase needs separate approval. PR #3 is open and needs exact-head checks before merge.
+
 2026-09-11 00:49 EDT | [codex] | Rechecked the Reddit post after the automated karma response: the removal banner was gone, the post appeared in the signed-in r/Codex New feed, and the page showed about 1.1K views | Treat distribution as resumed but logged-out readback as unverified. Do not repost or send more Modmail; record 1.1K as the first exposure baseline because restoration time is unknown.
 
 2026-09-11 00:41 EDT | [codex] | Independently read the immediate `modmail-karma` response: u/nightlydaytrader has 0 r/Codex comment karma, moderators do not respond below 1, and the template says this is probably why the post was removed while also claiming detailed helpful posts are exempt | Treat the channel cause as probable, not proven. Do not reply or repost; participate genuinely, verify at least 1 subreddit comment karma, then recheck the original post.

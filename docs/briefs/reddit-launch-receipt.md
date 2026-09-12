@@ -113,3 +113,9 @@ Scope: synthetic grouping and filtering demo; not proof of real-chat reopening.
 The first visible exposure baseline is approximately 1.1K views at 00:49 EDT. The exact restoration
 time is unknown, so measure elapsed time from the original submission while preserving that the
 first 53 minutes included an initial filter. Independently verify public visibility when possible.
+
+Late 24-hour checkpoint: September 12 at approximately 13:37 EDT (37h41m after submission).
+The signed-in post showed 4.5K views, score 0, one repost, and only the automated moderator
+comment. A Chrome Incognito request reached Reddit's `Prove your humanity` CAPTCHA; no challenge
+was completed, so independent logged-out visibility is still unverified. No user feedback,
+confirmed installation, or bug was observed. See [launch follow-up](launch-followup-v0.1.5.md).

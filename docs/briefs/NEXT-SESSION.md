@@ -1,5 +1,17 @@
 # Continue Project Chats after requested wrapup
 
+## Launch checkpoint update — September 12, 2026, 13:37 EDT
+
+The late Reddit 24-hour check is recorded in `launch-followup-v0.1.5.md` and
+`reddit-launch-receipt.md`: signed-in post at 4.5K views, score 0, one repost, and only an
+automated comment. Chrome Incognito encountered Reddit's humanity CAPTCHA, so logged-out
+readback remains unverified. X showed 68 impressions, 13 engagements, and one link click;
+GitHub remained at one v0.1.5 download and zero stars/issues. No public installation or bug
+report was observed. Decision remains `MAINTAIN`. Do not repost, reply, appeal again, or pay
+to boost. Review X/GitHub again September 16; weekly r/Codex showcase participation needs
+its own exact draft and approval. PR #3 carries the Reddit launch record; verify its current
+head and checks before proposing a merge.
+
 ## Reconciliation update — September 10, 2026, 23:57 EDT
 
 Shared records and historical launch/capture gates have been reconciled. Pull request #2 was merged
