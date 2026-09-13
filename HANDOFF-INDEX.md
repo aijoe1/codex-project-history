@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-12 22:45 EDT | [codex] | Closed the v0.2.0 canonical-source gap: pushed the archive-viewer merge as public `main` commit `7a4810e`, verified both exact-head macOS and Ubuntu CI jobs passed (run 34733781241), confirmed tag `v0.2.0` commit `2c326b0` is now in `main`, and freshly downloaded the public VSIX to match SHA-256 `8a935ef058d15eb8343840e7ee7b2c023926a80931fba2e7337e74b910059108` | Product release, vendor pin, this-Mac installation, and live archive-viewer proof are complete. Marketplace and other-Mac rollout are intentionally outside v0.2.0; no follow-up action is required for this release.
+
 2026-09-12 22:44 EDT | [codex] | Reconciled the archived-viewer release branch into current `main` while retaining the Reddit/launch records, corrected v0.2.0 from a stale “release candidate” label to its verified public tag/asset receipt, and passed 32 tests, static/shell checks, VSIX packaging, runtime-hash receipt comparison, and a 4-before/4-after real archive proof | Push the exact merge to `origin/main`, wait for macOS/Ubuntu CI, then verify public `main` contains the tag implementation. Marketplace and other-Mac rollout are outside v0.2.0.
 
 2026-09-12 22:30 EDT | [codex] | Merged owner-approved, records-only PR #3 at exact head 71c28ec as main commit 2bd6d91; verified main contains the launch record and post-merge CI run 34733175206 passed | No product or publication action changed. Weekly r/Codex showcase requires a separate exact approval; X/GitHub review remains September 16.
