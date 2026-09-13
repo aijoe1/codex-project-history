@@ -2,10 +2,19 @@
 
 Draft revision: `launch-packet-v0.1.5-r1`
 Prepared: 2026-09-08
-Status updated 2026-09-10: GitHub reply and X launch published after separate approvals; the first
+Status updated 2026-09-12: GitHub reply and X launch published after separate approvals; the first
 X checkpoint was captured late at 26 hours 16 minutes with a `MAINTAIN` decision.
-The final status-bar video was approved and published with X. Reddit remains unpublished and
-manual-only. See [X receipt](x-launch-receipt.md) and [current follow-up](launch-followup-v0.1.5.md).
+The final status-bar video was approved and published with X. The owner manually submitted the
+Reddit post, but Reddit's automated filters immediately removed it. See the [X receipt](x-launch-receipt.md),
+[Reddit attempt receipt](reddit-launch-receipt.md), and [current follow-up](launch-followup-v0.1.5.md).
+One owner-approved Modmail appeal was sent September 11 at approximately 00:38 EDT.
+The automated response cited 0 r/Codex comment karma as the probable removal cause and said the
+moderation team responds only after the account reaches at least 1, despite also claiming detailed
+helpful posts are exempt.
+At approximately 00:49 EDT, the signed-in removal banner had disappeared, the post appeared in the
+r/Codex `New` feed, and the page showed about 1.1K views. The late Reddit 24-hour check showed
+4.5K signed-in views but no independent user comments or confirmed installs. Chrome Incognito hit
+Reddit's humanity CAPTCHA, so independent logged-out readback remains unverified.
 The original drafts and proposed order below are historical, not outstanding publication tasks.
 
 ## Recommendation
@@ -128,5 +137,7 @@ deploy.`
 
 The GitHub reply above and the separately approved question-led X post are already published.
 The historical X copy above was not the selected copy; use x-launch-receipt.md for the exact post.
-Do not post either again. Reddit uses the newer r2 draft in launch-followup-v0.1.5.md and requires
-owner review and manual submission. Further posts or replies require separate approval.
+Do not post either again. The owner manually submitted Reddit revision r3, but Reddit filtered it;
+the signed-in feed later showed it distributing. Do not repost. One approved Modmail appeal was
+sent; any additional post, reply, or moderator message requires separate approval. Genuine r/Codex
+participation is appropriate for future moderator access, not as a way to manufacture engagement.

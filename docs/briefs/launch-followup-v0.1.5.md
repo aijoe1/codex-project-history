@@ -37,8 +37,15 @@ default limit is 300. The derived engagement rate is approximately 11.9% and the
 approximately 1.7%, but the 59-impression sample is too small for a product conclusion.
 
 Decision: `MAINTAIN`. Do not change product scope or pay to promote this post from this result.
-Keep the manual r/codex draft as the next optional distribution experiment, requiring separate
-exact approval, and review cumulative signals again September 16.
+The owner manually attempted the r/codex distribution experiment on September 10, but Reddit's
+automated filters immediately removed it. This is a distribution failure, not a demand result.
+The owner separately approved one Modmail appeal, which was sent September 11 at approximately
+00:38 EDT and verified by Reddit's `Message sent` confirmation. An immediate automated reply cited
+0 r/Codex comment karma as the probable removal cause and a minimum of 1 for moderator responses,
+while also claiming detailed helpful posts are exempt. At approximately 00:49 EDT the removal
+banner was gone, the post appeared in the signed-in r/Codex `New` feed, and the page showed about
+1.1K views. Treat the karma response as a future moderation-access gate, not the final post state.
+Review cumulative signals again September 16.
 
 ## Manual measurement plan
 
@@ -56,6 +63,7 @@ elapsed time with each observation.
 - Classify feedback as bug, missing use case, positioning, distribution, or noise.
 - Prioritize reproducible failures. Low reach does not disprove demand; do not attribute all
   GitHub activity to X because the GitHub issue reply and other discovery paths also exist.
+- Do not start a Reddit measurement clock unless public visibility is independently confirmed.
 
 ## GitHub late baseline
 
@@ -66,37 +74,58 @@ on the OpenAI issue reply. This is a late baseline with no attributable installa
 
 ## Reddit rules receipt
 
-Read the rendered logged-in https://www.reddit.com/r/codex/about/rules/ on September 9 EDT.
+Read the rendered logged-in https://www.reddit.com/r/codex/about/rules/ on September 9 EDT and
+rechecked the relevant rules after the September 10 submission.
 Rules 2/3 require relevant detailed content; rule 7 asks to check existing posts; rule 8 requires
-appropriate flair; rule 9 says "Don't use bots." Owner should review and submit manually.
+appropriate flair; rule 9 says "Don't use bots." The owner submitted manually.
 No explicit blanket self-promotion ban appeared in the ten rules inspected; this is not moderator
-approval. Recheck recent similar posts, available showcase flair, and submit-time rules before posting.
+approval. Rule 4 says Showcase and high-effort useful posts are exempt from its low-karma delay
+rule. Rule 5 says automated moderation can make mistakes and directs authors to Modmail.
 
-## Reddit draft r2 — unpublished
+## Reddit submission r3 — initially filtered, later visible in signed-in feed
 
-Title: **I built a project-first chat picker for Codex in VS Code (macOS, open source)**
+The owner manually submitted the final revised copy with `Showcase` flair and the approved video
+at approximately September 10, 23:56 EDT. Reddit created the post URL but immediately reported
+that its filters removed the post. Exact copy, URL, media checksum, UI verification, and the
+measurement boundary are in [the Reddit launch attempt receipt](reddit-launch-receipt.md).
 
-I use Codex across several VS Code projects. Finding an older chat meant opening threads one by
-one to figure out which repo they belonged to.
+At the 53-minute recheck, the removal banner was gone, the post appeared in the signed-in `New`
+feed, and the page showed about 1.1K views. Logged-out public readback remains unverified.
 
-I built Project Chats to make that easier. Click **Project Chats** in the status bar or press
-**Control+Command+H**. It groups chats by repo, puts the current workspace first, and shows the
-branch and working directory before you open a thread.
+Do not repost or reply again now. The current post appears to be distributing under the detailed
+Showcase exception. Participate genuinely in r/Codex to reach at least 1 subreddit comment karma for
+future moderation access, but do not manufacture engagement or attach Project Chats promotion to
+unrelated discussions.
 
-I am the author. Source and installation instructions:
-https://github.com/aijoe1/codex-project-history
+## Late Reddit 24-hour checkpoint — September 12
 
-It reads local metadata without modifying chat history. It is macOS-only, installs through GitHub,
-and relies on undocumented Codex internals that could change.
+Observed September 12 at approximately 13:37 EDT, about 37 hours 41 minutes after the original
+September 10, 23:56 EDT submission. The signed-in Reddit post displayed 4.5K views, score 0,
+one repost, and one comment. That sole comment was the locked, stickied, automated moderator
+notice about the weekly showcase; there were no independent user comments, public install
+confirmations, or bug reports. Views rose from about 1.9K at the September 11 02:15 EDT check,
+but view count alone is exposure, not adoption or validated demand. The initial filtered period
+and unknown restoration time remain part of this measurement.
 
-I tested it across my workspaces and on a second Mac. The attached demo uses fictional chats to
-show grouping and filtering, not real-chat reopening.
+A separate Chrome Incognito readback reached Reddit's `Prove your humanity` CAPTCHA, so
+logged-out public visibility is still unverified. No challenge was completed and no repost,
+reply, or additional Modmail message was sent.
 
-If you use multi-root workspaces or Git worktrees, does it put the right project first? Please
-remove private paths and chat titles from screenshots or diagnostics.
+The unrelated, helpful r/Codex participation comment was independently read back September 11
+at score 2, one net vote above Reddit's default self-vote. This supports genuine outside
+engagement, but exact subreddit comment karma and moderator eligibility remain unverified.
+Comment: https://www.reddit.com/r/codex/comments/1wd56ig/comment/p93ix9a/
 
-Attachment if owner submits: ../media/project-chats-button-demo-pullback-v0.1.5.mp4.
-No Reddit upload or submission performed. Test statements above are owner-reported.
+Decision remains `MAINTAIN`: keep the shipped picker unchanged and wait for qualitative feedback.
+The next combined X/GitHub review is September 16. The weekly r/Codex showcase on
+September 15–16 is an optional distribution test, not yet approved for submission.
+
+At the same September 12 check, signed-in X analytics showed 68 impressions, 13 engagements,
+8 detail expands, 0 profile visits, 1 link click, 2 likes, 1 outside reply, 0 reposts,
+23 unique video views, and 26 total video views. Retention at the 11-second end was 42%.
+The OpenAI issue reply still had zero reactions. GitHub showed one v0.1.5 asset download,
+zero stars, forks, watchers, and repository issues. None of these counts proves an install
+or attributes traffic to a particular channel.
 
 ## Technical handoff (resolved September 9, 23:35 EDT)
 
@@ -113,4 +142,4 @@ not repaired. No editor reload, permission change, or binary replacement was per
 
 Launch and shared records have been reconciled; consult Git for their commit status.
 Do not reinstall Project Chats or restore obsolete executable paths as a workaround.
-No monitoring, replies, new publication, push, or paid promotion is authorized.
+No monitoring, replies, repost, additional Modmail message, push, or paid promotion is authorized.

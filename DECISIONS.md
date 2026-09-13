@@ -1,5 +1,50 @@
 # Decision Log
 
+## 2026-09-11 - Let the restored Reddit Showcase run without reposting `ACTIVE`
+
+**What:** Treat the disappearance of the removal banner, appearance in the signed-in r/Codex `New`
+feed, and approximately 1.1K displayed views as strong evidence that the detailed Showcase resumed
+distribution. Do not repost or send more Modmail. Keep public visibility bounded as unverified until
+an independent logged-out readback succeeds.
+
+**Why:** The post state changed after the initial filter and automated 0-comment-karma response.
+Reddit's own template says detailed helpful posts are allowed regardless of karma, which is
+consistent with the later feed state. The exact restoration time is unknown.
+
+**Impact:** Record 1.1K views at 00:49 EDT as the first exposure baseline, not a 53-minute growth
+measurement. Genuine community participation can improve future moderation access, but must not be
+used to manufacture engagement or promote Project Chats in unrelated threads.
+
+## 2026-09-11 - Build genuine r/Codex participation for future moderator access `ACTIVE`
+
+**What:** Do not reply to Modmail or repost Project Chats. Participate genuinely in r/Codex
+discussions and verify that `u/nightlydaytrader` reaches at least 1 r/Codex comment karma for future
+moderator access.
+
+**Why:** The immediate automated Modmail response reported 0 r/Codex comment karma, said moderators
+do not respond below 1, and identified that as the probable removal cause. It also claimed detailed
+helpful posts are exempt, so the specific filter logic remains unresolved rather than proven.
+
+**Impact:** The current post later appeared to resume distribution under the detailed-Showcase
+exception, so karma is not a prerequisite for this post's current reach. Genuine community
+participation remains the next account-health step; do not manufacture engagement, mass-comment,
+repost, or send another appeal merely to bypass the filter.
+
+## 2026-09-10 - Appeal the filtered Reddit post before any repost `ACTIVE`
+
+**What:** Treat the manually submitted r/codex post as a filtered launch attempt, not a completed
+distribution test. Recommend one concise Modmail appeal before considering another Reddit post.
+
+**Why:** Reddit created the post URL but immediately displayed that its automated filters removed
+the post. The final copy was detailed, used `Showcase` flair, disclosed authorship, and was submitted
+manually. The subreddit itself says its moderator bot can make mistakes and directs authors to
+Modmail. The specific filter reason remains unknown.
+
+**Impact:** The owner separately approved the exact appeal, which was sent September 11 at
+approximately 00:38 EDT. Do not infer demand from Reddit reach, start a Reddit measurement clock,
+repost the same content, or send another moderator message. If the post becomes public, record the
+first verified visibility time separately from its original submission time.
+
 ## 2026-09-10 - Maintain the shipped wedge and test distribution separately `ACTIVE`
 
 **What:** Keep Project Chats v0.1.5 unchanged after the first X follow-up. Treat the prepared

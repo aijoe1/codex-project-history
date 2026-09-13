@@ -1,5 +1,15 @@
 # Handoff Index
 
+2026-09-12 13:41 EDT | [codex] | Captured the late Reddit checkpoint (4.5K signed-in views, no user comments), X (68 impressions, 13 engagements, 1 link click), and unchanged GitHub release baseline; Incognito public readback hit Reddit's CAPTCHA; removed private checkout references from the public handoff | MAINTAIN; no new post or product change. Review September 16; weekly showcase needs separate approval. PR #3 is open and needs exact-head checks before merge.
+
+2026-09-11 00:49 EDT | [codex] | Rechecked the Reddit post after the automated karma response: the removal banner was gone, the post appeared in the signed-in r/Codex New feed, and the page showed about 1.1K views | Treat distribution as resumed but logged-out readback as unverified. Do not repost or send more Modmail; record 1.1K as the first exposure baseline because restoration time is unknown.
+
+2026-09-11 00:41 EDT | [codex] | Independently read the immediate `modmail-karma` response: u/nightlydaytrader has 0 r/Codex comment karma, moderators do not respond below 1, and the template says this is probably why the post was removed while also claiming detailed helpful posts are exempt | Treat the channel cause as probable, not proven. Do not reply or repost; participate genuinely, verify at least 1 subreddit comment karma, then recheck the original post.
+
+2026-09-11 00:38 EDT | [codex] | Sent the exact owner-approved Modmail appeal to r/codex moderators from u/nightlydaytrader and verified Reddit's `Message sent` confirmation | Post remains filtered unless independently verified otherwise. Do not repost or send another moderator message; next measurement remains September 16.
+
+2026-09-10 23:57 EDT | [codex] | Verified the owner-manual r/codex submission, exact r3 copy, Showcase flair, 11-second demo, and permanent URL; Reddit's automated filters immediately removed the post; recorded a launch-attempt receipt and kept the MAINTAIN decision | Do not interpret Reddit reach or repost. Recommended next external action is one separately approved Modmail appeal; X/GitHub review remains September 16.
+
 2026-09-10 23:34 EDT | [codex] | Captured the signed-in X checkpoint late at 26h16m: 59 impressions, 7 engagements, 1 link click, 22 unique video views, one qualified onboarding question, and no verified public install or bug; refreshed GitHub at 1 download and 0 stars/issues/reactions; updated README and launch records with a MAINTAIN decision | Exact-head CI and separate approval remain required before merging PR #2. Optional r/codex draft is manual-only and separately gated; next measurement September 16.
 
 2026-09-10 19:49 EDT | [codex] | Pushed the two v0.1.5 launch/wrapup commits, opened PR #2, reconciled its duplicate-release conflict with current main, and verified the merged tree with 25 tests, static checks, official-runtime fixture creation, and a 3-chat/2-project smoke | Exact-head CI and final review must pass before a separately approved merge. Manual 24-hour X feedback review remains due September 10 at 21:18 EDT; no new publication or monitoring authorized.

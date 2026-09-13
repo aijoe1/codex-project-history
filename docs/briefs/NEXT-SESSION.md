@@ -1,22 +1,38 @@
 # Continue Project Chats after requested wrapup
 
-## Reconciliation update — September 10, 2026, 23:34 EDT
+## Launch checkpoint update — September 12, 2026, 13:37 EDT
 
-Shared records and historical launch/capture gates have been reconciled. The two local wrapup
-commits were pushed, then merged with the current `origin/main` in an isolated worktree to resolve
-the duplicate v0.1.5 release-history conflict. Pull request #2 is open at
-https://github.com/aijoe1/codex-project-history/pull/2. The old pending steps below are retained as
-provenance, not instructions to repeat completed work. The earlier temporary worktree and its two
-untracked alternate video exports no longer exist; the approved pullback video remains tracked.
+The late Reddit 24-hour check is recorded in `launch-followup-v0.1.5.md` and
+`reddit-launch-receipt.md`: signed-in post at 4.5K views, score 0, one repost, and only an
+automated comment. Chrome Incognito encountered Reddit's humanity CAPTCHA, so logged-out
+readback remains unverified. X showed 68 impressions, 13 engagements, and one link click;
+GitHub remained at one v0.1.5 download and zero stars/issues. No public installation or bug
+report was observed. Decision remains `MAINTAIN`. Do not repost, reply, appeal again, or pay
+to boost. Review X/GitHub again September 16; weekly r/Codex showcase participation needs
+its own exact draft and approval. PR #3 carries the Reddit launch record; verify its current
+head and checks before proposing a merge.
+
+## Reconciliation update — September 10, 2026, 23:57 EDT
+
+Shared records and historical launch/capture gates have been reconciled. Pull request #2 was merged
+as `5c225f98c404b4d6c22b1b2a4c9c0533270fb46c`. The old pending steps below are retained as provenance,
+not instructions to repeat completed work. The approved pullback video remains tracked.
 
 The late first X checkpoint is complete: 59 impressions, 7 engagements, 1 link click, 22 unique
 video views, and one qualified onboarding question, with no verified public install or bug report.
-Decision: `MAINTAIN`; review again September 16. Next: after all checks pass on the exact
-pull-request head, request a separate decision before merging pull request #2. The optional r/codex
-draft also requires separate exact approval and manual submission. No scheduled monitor, new post,
-reply, Reddit submission, merge, or release is authorized. Start from
-the canonical checkout at `/Users/miniai/Codex Project History`, fetch before relying on branch or
-pull-request state, and review the latest HANDOFF-INDEX.md and Git status first.
+Decision: `MAINTAIN`; review again September 16. The owner manually submitted Reddit revision r3 at
+approximately 23:56 EDT, but Reddit's automated filters immediately removed it. The exact receipt is
+in `reddit-launch-receipt.md`. The owner separately approved one concise Modmail appeal; it was sent
+September 11 at approximately 00:38 EDT and Reddit displayed `Message sent`. The immediate automated
+response reported 0 r/Codex comment karma, said moderators do not respond below 1, and identified
+that as the probable removal cause, while also claiming detailed helpful posts are exempt. At 00:49
+EDT, the removal banner was gone, the post appeared in the signed-in `New` feed, and it showed about
+1.1K views. Logged-out readback remains unavailable. Do not repost or reply again. Genuine r/Codex
+participation is the next account-health step, but it must add independent value rather than promote
+Project Chats. No scheduled monitor, new post, reply, additional appeal, merge, or release is
+authorized. Start from the canonical Project Chats checkout, fetch before relying on branch or
+pull-request state, and review the latest HANDOFF-INDEX.md and Git status first. Do not publish
+private local paths in this public repository.
 
 The initial snapshot was recorded September 9, 2026, 22:21 EDT. This updated reconciliation is
 the authoritative continuation snapshot; older launch-packet and HANDOFF-INDEX status lines are
@@ -26,8 +42,8 @@ historical and not current.
 
 Do not follow this section as current instructions; it records the state before pull request #2.
 
-Continue the Project Chats launch in `/private/tmp/codex-project-history-v015`, branch
-`codex/timeout-terminal-v015`. Do not work in Peptide Portal (the previous session's unrelated cwd).
+Continue the Project Chats launch in the former isolated v0.1.5 worktree, branch
+`codex/timeout-terminal-v015`. Do not work in an unrelated project checkout.
 Read AGENTS.md, this file, x-launch-receipt.md, and launch-followup-v0.1.5.md first.
 
 First verify that existing-file apply_patch works after restarting the affected Codex/editor
