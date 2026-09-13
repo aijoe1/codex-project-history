@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-12 22:44 EDT | [codex] | Reconciled the archived-viewer release branch into current `main` while retaining the Reddit/launch records, corrected v0.2.0 from a stale “release candidate” label to its verified public tag/asset receipt, and passed 32 tests, static/shell checks, VSIX packaging, runtime-hash receipt comparison, and a 4-before/4-after real archive proof | Push the exact merge to `origin/main`, wait for macOS/Ubuntu CI, then verify public `main` contains the tag implementation. Marketplace and other-Mac rollout are outside v0.2.0.
+
 2026-09-12 22:30 EDT | [codex] | Merged owner-approved, records-only PR #3 at exact head 71c28ec as main commit 2bd6d91; verified main contains the launch record and post-merge CI run 34733175206 passed | No product or publication action changed. Weekly r/Codex showcase requires a separate exact approval; X/GitHub review remains September 16.
 
 2026-09-12 13:41 EDT | [codex] | Captured the late Reddit checkpoint (4.5K signed-in views, no user comments), X (68 impressions, 13 engagements, 1 link click), and unchanged GitHub release baseline; Incognito public readback hit Reddit's CAPTCHA; removed private checkout references from the public handoff | MAINTAIN; no new post or product change. Review September 16; weekly showcase needs separate approval. PR #3 is open and needs exact-head checks before merge.

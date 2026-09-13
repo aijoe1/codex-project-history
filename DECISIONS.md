@@ -1,5 +1,18 @@
 # Decision Log
 
+## 2026-09-12 - Make v0.2.0's tagged archive viewer canonical on `main` `ACTIVE`
+
+**What:** Merge the already tagged and publicly released `v0.2.0` archive-viewer branch into the
+canonical source `main`, preserving the intervening launch-record history.
+
+**Why:** A released public artifact and the private vendor receipt already identify commit
+`2c326b0` as v0.2.0. Leaving its implementation only on a release branch would make the canonical
+source misleading and complicate the next compatibility fix.
+
+**Impact:** `main` contains the shipped archive viewer, its security boundary, release receipt, and
+full test coverage. GitHub Releases remains the distribution channel; Marketplace and other-Mac
+rollout remain outside this release.
+
 ## 2026-09-11 - Let the restored Reddit Showcase run without reposting `ACTIVE`
 
 **What:** Treat the disappearance of the removal banner, appearance in the signed-in r/Codex `New`
