@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - Unreleased
+## 0.2.0 - 2026-09-12
 
 - Add a project-aware archived-chat picker and native read-only transcript viewer.
 - Keep archive viewing non-mutating and filter injected session context, tool output, and image data.
