@@ -1,5 +1,16 @@
 # Continue Project Chats after requested wrapup
 
+## PR #3 merge update — September 12, 2026, 22:29 EDT
+
+Joe chose to merge the records-only PR #3. GitHub verified its exact head
+`71c28ec020be618d9379007004914fbaaa9e16f0` merged into `main` as
+`2bd6d912580ecae55ec6e4282cf5cccd2594af67` at 22:29 EDT. The merged `main` serves the
+launch follow-up record, and CI run `34733175206` passed on the merge commit. No product code,
+release, installation, new post, reply, or promotion changed. The September 12 launch checkpoint
+below remains the latest measured result. Next: consider a separately approved weekly r/Codex
+showcase entry on September 15–16, and measure X/GitHub again September 16. Do not infer an
+installation or public Reddit visibility from views alone.
+
 ## Launch checkpoint update — September 12, 2026, 13:37 EDT
 
 The late Reddit 24-hour check is recorded in `launch-followup-v0.1.5.md` and

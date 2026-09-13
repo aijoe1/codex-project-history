@@ -1,5 +1,7 @@
 # Handoff Index
 
+2026-09-12 22:30 EDT | [codex] | Merged owner-approved, records-only PR #3 at exact head 71c28ec as main commit 2bd6d91; verified main contains the launch record and post-merge CI run 34733175206 passed | No product or publication action changed. Weekly r/Codex showcase requires a separate exact approval; X/GitHub review remains September 16.
+
 2026-09-12 13:41 EDT | [codex] | Captured the late Reddit checkpoint (4.5K signed-in views, no user comments), X (68 impressions, 13 engagements, 1 link click), and unchanged GitHub release baseline; Incognito public readback hit Reddit's CAPTCHA; removed private checkout references from the public handoff | MAINTAIN; no new post or product change. Review September 16; weekly showcase needs separate approval. PR #3 is open and needs exact-head checks before merge.
 
 2026-09-11 00:49 EDT | [codex] | Rechecked the Reddit post after the automated karma response: the removal banner was gone, the post appeared in the signed-in r/Codex New feed, and the page showed about 1.1K views | Treat distribution as resumed but logged-out readback as unverified. Do not repost or send more Modmail; record 1.1K as the first exposure baseline because restoration time is unknown.
