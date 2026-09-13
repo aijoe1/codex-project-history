@@ -34,7 +34,11 @@ function clampLimit(value) {
   return Math.max(25, Math.min(1000, Math.floor(parsed)));
 }
 
-function chatQuery(limit) {
+function chatQuery(limit, { archived = false } = {}) {
+  const archivedValue = archived ? 1 : 0;
+  const rolloutPath = archived
+    ? "COALESCE(rollout_path, '') AS rollout_path"
+    : "'' AS rollout_path";
   return `
 SELECT
   id,
@@ -42,9 +46,11 @@ SELECT
   cwd,
   COALESCE(git_branch, '') AS git_branch,
   COALESCE(git_origin_url, '') AS git_origin_url,
+  ${rolloutPath},
+  archived,
   CASE WHEN recency_at > 0 THEN recency_at ELSE updated_at END AS last_used_at
 FROM threads
-WHERE archived = 0
+WHERE archived = ${archivedValue}
   AND source = 'vscode'
   AND COALESCE(thread_source, '') IN ('', 'user')
 ORDER BY last_used_at DESC
@@ -116,13 +122,19 @@ function queryChats(database, query, run, immutable = false) {
   return rows.filter((row) => row.id && row.cwd);
 }
 
-function loadChats({ codexHome, maxChats = 300, run = execFileSync, onDiagnostic = () => {} }) {
+function loadChats({
+  codexHome,
+  maxChats = 300,
+  archived = false,
+  run = execFileSync,
+  onDiagnostic = () => {},
+}) {
   const databases = candidateStateDatabases(codexHome);
   if (databases.length === 0) {
     throw new Error(`no state_*.sqlite database exists under ${codexHome}`);
   }
 
-  const query = chatQuery(maxChats);
+  const query = chatQuery(maxChats, { archived });
   const failures = [];
   for (const database of databases) {
     try {
@@ -284,7 +296,9 @@ function organizeChats(chats, roots = [], currentProjectKeys = []) {
 }
 
 function buildCodexThreadUri(threadId) {
-  if (!/^[0-9a-f-]{36}$/i.test(threadId || "")) throw new Error("invalid Codex chat ID");
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(threadId || "")) {
+    throw new Error("invalid Codex chat ID");
+  }
   return `openai-codex://route/local/${threadId}`;
 }
 

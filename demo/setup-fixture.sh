@@ -71,6 +71,7 @@ WORKSPACE="$DEMO_ROOT/projects/acme-dashboard"
 STOREFRONT="$DEMO_ROOT/projects/storefront"
 CODEX_HOME_DIR="$DEMO_ROOT/codex-home"
 STATE_ROOT="$DEMO_ROOT/codex-state"
+ARCHIVE_DIR="$CODEX_HOME_DIR/archived_sessions"
 
 # VS Code places its macOS IPC socket under the user-data directory and rejects socket paths
 # longer than 103 characters. TMPDIR is commonly too long, so keep this separate root under /tmp.
@@ -85,7 +86,7 @@ else
   VSCODE_USER_DATA="$(mktemp -d /tmp/cph-vscode.XXXXXX)"
 fi
 
-mkdir -p "$WORKSPACE" "$STOREFRONT" "$CODEX_HOME_DIR" "$STATE_ROOT"
+mkdir -p "$WORKSPACE" "$STOREFRONT" "$ARCHIVE_DIR" "$STATE_ROOT"
 git -C "$WORKSPACE" init -q
 git -C "$WORKSPACE" remote add origin https://github.com/example/acme-dashboard.git
 git -C "$STOREFRONT" init -q
@@ -100,7 +101,15 @@ sql_escape() {
 WORKSPACE_SQL="$(sql_escape "$WORKSPACE")"
 STOREFRONT_SQL="$(sql_escape "$STOREFRONT")"
 DEMO_ROOT_SQL="$(sql_escape "$DEMO_ROOT")"
+ARCHIVE_SQL="$(sql_escape "$ARCHIVE_DIR/rollout-00000000-0000-4000-8000-000000000004.jsonl")"
 NOW="$(date +%s)"
+
+cat >"$ARCHIVE_DIR/rollout-00000000-0000-4000-8000-000000000004.jsonl" <<'JSONL'
+{"type":"session_meta","payload":{"id":"00000000-0000-4000-8000-000000000004"}}
+{"type":"response_item","payload":{"type":"message","role":"developer","content":[{"type":"input_text","text":"Synthetic internal context must not appear."}]}}
+{"type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"<environment_context>synthetic context</environment_context>"},{"type":"input_text","text":"Summarize the release plan."}]}}
+{"type":"response_item","payload":{"type":"message","role":"assistant","content":[{"type":"output_text","text":"The release plan is ready for review. This is a synthetic archived transcript."}]}}
+JSONL
 
 /usr/bin/sqlite3 "$STATE_DATABASE" <<SQL
 BEGIN IMMEDIATE;
@@ -111,7 +120,8 @@ INSERT INTO threads (
 ) VALUES
   ('00000000-0000-4000-8000-000000000001', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000001.jsonl', $((NOW - 60)), $((NOW - 60)), 'vscode', 'openai', '$WORKSPACE_SQL', 'Fix the failing deploy', 'Fix the failing deploy', 'Fix the failing deploy', '{"type":"read-only"}', 'never', 1, 0, 'main', 'https://github.com/example/acme-dashboard.git', $((NOW - 60)), 'user'),
   ('00000000-0000-4000-8000-000000000002', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000002.jsonl', $((NOW - 120)), $((NOW - 120)), 'vscode', 'openai', '$WORKSPACE_SQL', 'Review authentication flow', 'Review authentication flow', 'Review authentication flow', '{"type":"read-only"}', 'never', 1, 0, 'feat/auth-review', 'https://github.com/example/acme-dashboard.git', $((NOW - 120)), 'user'),
-  ('00000000-0000-4000-8000-000000000003', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000003.jsonl', $((NOW - 180)), $((NOW - 180)), 'vscode', 'openai', '$STOREFRONT_SQL', 'Fix the failing deploy', 'Fix the failing deploy', 'Fix the failing deploy', '{"type":"read-only"}', 'never', 1, 0, 'release', 'https://github.com/example/storefront.git', $((NOW - 180)), 'user');
+  ('00000000-0000-4000-8000-000000000003', '$DEMO_ROOT_SQL/synthetic-sessions/00000000-0000-4000-8000-000000000003.jsonl', $((NOW - 180)), $((NOW - 180)), 'vscode', 'openai', '$STOREFRONT_SQL', 'Fix the failing deploy', 'Fix the failing deploy', 'Fix the failing deploy', '{"type":"read-only"}', 'never', 1, 0, 'release', 'https://github.com/example/storefront.git', $((NOW - 180)), 'user'),
+  ('00000000-0000-4000-8000-000000000004', '$ARCHIVE_SQL', $((NOW - 240)), $((NOW - 240)), 'vscode', 'openai', '$WORKSPACE_SQL', 'Plan the release notes', 'Plan the release notes', 'Plan the release notes', '{"type":"read-only"}', 'never', 1, 1, 'main', 'https://github.com/example/acme-dashboard.git', $((NOW - 240)), 'user');
 COMMIT;
 SQL
 
@@ -130,7 +140,9 @@ cat <<OUT
 Use that exact command even when VS Code is already open. The short, isolated user-data directory
 keeps the demo environment separate and avoids the macOS IPC socket-length limit.
 
-Then press Control+Command+H. Do not open the synthetic chats; they have no transcripts.
+Then press Control+Command+H for active chats, or run **Codex: Search Archived Chats by Project**
+and open the synthetic archived chat. Its transcript is fictional and safe to display. Do not try
+to restore it because the synthetic ID is not a real Codex session.
 After closing the demo window, delete these temporary directories when capture is complete:
   $DEMO_ROOT
   $VSCODE_USER_DATA

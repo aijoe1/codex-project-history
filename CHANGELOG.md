@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 - Unreleased
+
+- Add a project-aware archived-chat picker and native read-only transcript viewer.
+- Keep archive viewing non-mutating and filter injected session context, tool output, and image data.
+- Add an explicit modal-confirmed restore action using the Codex CLI with exact UUID arguments.
+- Preserve active-chat compatibility with Codex databases that predate the transcript-path column.
+
 ## 0.1.5 - 2026-09-08
 
 - Report a timeout reading the newest Codex state database instead of silently returning history
