@@ -91,6 +91,58 @@ test("loader sends the archived selector to SQLite without changing the database
   }
 });
 
+test("current-project query finds older chats beyond the global limit, including worktrees", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-scope-test-"));
+  const database = path.join(root, "state_5.sqlite");
+  try {
+    execFileSync("/usr/bin/sqlite3", [database, `
+CREATE TABLE threads (
+  id TEXT, name TEXT, preview TEXT, title TEXT, cwd TEXT, git_branch TEXT,
+  git_origin_url TEXT, rollout_path TEXT, recency_at INTEGER, updated_at INTEGER,
+  archived INTEGER, source TEXT, thread_source TEXT
+);
+WITH RECURSIVE seq(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM seq WHERE n < 350)
+INSERT INTO threads
+SELECT printf('other-%03d', n), 'Other project', '', '', '/work/other', '',
+  'https://github.com/example/other.git', '', 1000 - n, 1000 - n, 0, 'vscode', 'user'
+FROM seq;
+INSERT INTO threads VALUES
+  ('current-root', 'Current root', '', '', '/work/project', 'main',
+   'https://github.com/example/project.git', '', 10, 10, 0, 'vscode', 'user'),
+  ('current-worktree', 'Current worktree', '', '', '/tmp/project-worktree', 'feature',
+   'git@github.com:example/project.git', '', 9, 9, 0, 'vscode', 'user'),
+  ('archived-current', 'Archived current', '', '', '/work/project', 'main',
+   'https://github.com/example/project.git', '/tmp/archived.jsonl', 8, 8, 1, 'vscode', 'user');
+`], { encoding: "utf8" });
+
+    const global = loadChats({ codexHome: root, maxChats: 300 });
+    assert.equal(global.length, 300);
+    assert.equal(global.some((chat) => chat.id === "current-root"), false);
+
+    const currentProject = {
+      roots: ["/work/project"],
+      keys: ["git:github.com/example/project"],
+    };
+    const current = loadChats({ codexHome: root, maxChats: 300, currentProject });
+    assert.deepEqual(current.map((chat) => chat.id), ["current-root", "current-worktree"]);
+    assert.deepEqual(
+      loadChats({ codexHome: root, archived: true, currentProject }).map((chat) => chat.id),
+      ["archived-current"],
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("current-project SQL treats workspace paths and origin URLs as values", () => {
+  const query = chatQuery(300, {
+    scope: { roots: ["/work/O'Brien"], origins: ["https://example.com/o'repo.git"] },
+  });
+  assert.match(query, /O''Brien/);
+  assert.match(query, /o''repo/);
+  assert.doesNotMatch(query, /\b(?:UPDATE|DELETE|INSERT)\b/i);
+});
+
 test("loader falls back when the newest state database is incompatible", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-history-test-"));
   try {
@@ -728,6 +780,116 @@ test("status bar follows configuration changes without a reload", () => {
   } finally {
     Module._load = originalLoad;
     delete require.cache[extensionPath];
+  }
+});
+
+test("picker starts in the current project, switches to all, and guards a foreign chat", async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-picker-test-"));
+  const database = path.join(root, "state_5.sqlite");
+  const priorSqliteHome = process.env.CODEX_SQLITE_HOME;
+  const originalLoad = Module._load;
+  const extensionPath = require.resolve("../extension");
+  try {
+    execFileSync("/usr/bin/sqlite3", [database, `
+CREATE TABLE threads (
+  id TEXT, name TEXT, preview TEXT, title TEXT, cwd TEXT, git_branch TEXT,
+  git_origin_url TEXT, rollout_path TEXT, recency_at INTEGER, updated_at INTEGER,
+  archived INTEGER, source TEXT, thread_source TEXT
+);
+INSERT INTO threads VALUES
+  ('00000000-0000-4000-8000-000000000001', 'Current chat', '', '', '/work/project', '', '', '', 10, 10, 0, 'vscode', 'user'),
+  ('00000000-0000-4000-8000-000000000002', 'Other chat', '', '', '/work/other', '', '', '', 20, 20, 0, 'vscode', 'user');
+`], { encoding: "utf8" });
+    process.env.CODEX_SQLITE_HOME = root;
+
+    const commands = new Map();
+    const opened = [];
+    let warningResponse;
+    let warningCount = 0;
+    let picker;
+    const vscode = {
+      commands: {
+        registerCommand(name, handler) {
+          commands.set(name, handler);
+          return { dispose() {} };
+        },
+        async executeCommand(...args) { opened.push(args); },
+      },
+      EventEmitter: class EventEmitter {
+        constructor() { this.event = () => ({ dispose() {} }); }
+        fire() {}
+        dispose() {}
+      },
+      extensions: { getExtension: () => ({}) },
+      window: {
+        createOutputChannel: () => ({ appendLine() {}, dispose() {}, show() {} }),
+        createStatusBarItem: () => ({ show() {}, hide() {} }),
+        createQuickPick() {
+          picker = {
+            selectedItems: [],
+            onDidAccept(callback) { this.accept = callback; },
+            onDidTriggerButton(callback) { this.triggerButton = callback; },
+            onDidHide(callback) { this.hideCallback = callback; },
+            show() {},
+            dispose() {},
+          };
+          return picker;
+        },
+        async showWarningMessage() {
+          warningCount += 1;
+          return warningResponse;
+        },
+      },
+      workspace: {
+        workspaceFolders: [{ uri: { fsPath: "/work/project" } }],
+        getConfiguration: () => ({ get: (_name, fallback) => fallback }),
+        registerTextDocumentContentProvider: () => ({ dispose() {} }),
+        onDidChangeConfiguration: () => ({ dispose() {} }),
+      },
+      StatusBarAlignment: { Left: 1 },
+      QuickPickItemKind: { Separator: -1 },
+      ThemeIcon: class ThemeIcon { constructor(id) { this.id = id; } },
+      Uri: {
+        from: () => ({ toString: () => "archive:test" }),
+        parse: (value) => value,
+      },
+    };
+    Module._load = function load(request, parent, isMain) {
+      if (request === "vscode") return vscode;
+      return originalLoad.call(this, request, parent, isMain);
+    };
+    delete require.cache[extensionPath];
+    require(extensionPath).activate({ subscriptions: [] });
+
+    const first = commands.get("codexProjectHistory.open")();
+    assert.match(picker.title, /Current project/);
+    assert.equal(picker.items.some((item) => item.chat?.display_title === "Current chat"), true);
+    assert.equal(picker.items.some((item) => item.chat?.display_title === "Other chat"), false);
+    picker.triggerButton();
+    assert.match(picker.title, /All projects/);
+    const other = picker.items.find((item) => item.chat?.display_title === "Other chat");
+    picker.selectedItems = [other];
+    picker.accept();
+    await first;
+    assert.equal(warningCount, 1);
+    assert.deepEqual(opened, []);
+
+    warningResponse = "Open chat";
+    const second = commands.get("codexProjectHistory.open")();
+    picker.selectedItems = [picker.items.find((item) => item.switchScope)];
+    picker.accept();
+    picker.selectedItems = [picker.items.find((item) => item.chat?.display_title === "Other chat")];
+    picker.accept();
+    await second;
+    assert.equal(warningCount, 2);
+    assert.equal(opened.length, 1);
+    assert.match(opened[0][1], /00000000-0000-4000-8000-000000000002/);
+  } finally {
+    Module._load = originalLoad;
+    delete require.cache[extensionPath];
+    if (priorSqliteHome === undefined) delete process.env.CODEX_SQLITE_HOME;
+    else process.env.CODEX_SQLITE_HOME = priorSqliteHome;
+    fs.rmSync(root, { recursive: true, force: true });
   }
 });
 

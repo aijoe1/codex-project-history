@@ -34,11 +34,23 @@ function clampLimit(value) {
   return Math.max(25, Math.min(1000, Math.floor(parsed)));
 }
 
-function chatQuery(limit, { archived = false } = {}) {
+function sqlText(value) {
+  return `'${String(value).replace(/'/g, "''")}'`;
+}
+
+function chatQuery(limit, { archived = false, scope = null } = {}) {
   const archivedValue = archived ? 1 : 0;
   const rolloutPath = archived
     ? "COALESCE(rollout_path, '') AS rollout_path"
     : "'' AS rollout_path";
+  const scopedConditions = scope && [
+    ...scope.roots.map((root) => `cwd = ${sqlText(normalized(root))}`),
+    ...scope.roots.map((root) =>
+      `(COALESCE(git_origin_url, '') = '' AND substr(cwd, 1, length(${sqlText(normalized(root))}) + 1) = ${sqlText(`${normalized(root)}/`)})`,
+    ),
+    ...scope.origins.map((origin) => `git_origin_url = ${sqlText(origin)}`),
+  ];
+  const scopeCondition = scopedConditions ? `\n  AND (${scopedConditions.join(" OR ") || "0"})` : "";
   return `
 SELECT
   id,
@@ -52,10 +64,14 @@ SELECT
 FROM threads
 WHERE archived = ${archivedValue}
   AND source = 'vscode'
-  AND COALESCE(thread_source, '') IN ('', 'user')
+  AND COALESCE(thread_source, '') IN ('', 'user')${scopeCondition}
 ORDER BY last_used_at DESC
 LIMIT ${clampLimit(limit)};
 `.trim();
+}
+
+function originQuery() {
+  return `SELECT DISTINCT git_origin_url FROM threads WHERE source = 'vscode' AND COALESCE(git_origin_url, '') != '' AND COALESCE(thread_source, '') IN ('', 'user');`;
 }
 
 function codexSqliteHome(environment = process.env, homeDirectory = os.homedir()) {
@@ -109,7 +125,7 @@ function immutableDatabaseUri(database) {
   return uri.href;
 }
 
-function queryChats(database, query, run, immutable = false) {
+function queryRows(database, query, run, immutable = false) {
   const target = immutable ? immutableDatabaseUri(database) : database;
   const output = run("/usr/bin/sqlite3", ["-readonly", "-json", target, query], {
     encoding: "utf8",
@@ -118,7 +134,21 @@ function queryChats(database, query, run, immutable = false) {
     killSignal: "SIGKILL",
     stdio: ["ignore", "pipe", "pipe"],
   }).trim();
-  const rows = output === "" ? [] : JSON.parse(output);
+  return output === "" ? [] : JSON.parse(output);
+}
+
+function readChats(database, { maxChats, archived, currentProject }, run, immutable = false) {
+  let scope = null;
+  if (currentProject) {
+    const keys = new Set(currentProject.keys);
+    const origins = keys.size
+      ? queryRows(database, originQuery(), run, immutable)
+        .map((row) => row.git_origin_url)
+        .filter((origin) => keys.has(`git:${repositoryKey(origin)}`))
+      : [];
+    scope = { roots: currentProject.roots, origins };
+  }
+  const rows = queryRows(database, chatQuery(maxChats, { archived, scope }), run, immutable);
   return rows.filter((row) => row.id && row.cwd);
 }
 
@@ -126,6 +156,7 @@ function loadChats({
   codexHome,
   maxChats = 300,
   archived = false,
+  currentProject = null,
   run = execFileSync,
   onDiagnostic = () => {},
 }) {
@@ -134,24 +165,24 @@ function loadChats({
     throw new Error(`no state_*.sqlite database exists under ${codexHome}`);
   }
 
-  const query = chatQuery(maxChats, { archived });
+  const options = { maxChats, archived, currentProject };
   const failures = [];
   for (const database of databases) {
     try {
-      return queryChats(database, query, run);
+      return readChats(database, options, run);
     } catch (error) {
       if (isTimeout(error)) {
         throw new Error(`${path.basename(database)}: ${sqliteErrorMessage(error)}`);
       }
       if (isCantOpen(error) && walSidecarsAbsent(database)) {
         try {
-          const snapshot = queryChats(database, query, run, true);
+          const snapshot = readChats(database, options, run, true);
 
           // A writer may have started between the failed normal open and the
           // immutable read. If sidecars appeared, prefer a fresh WAL-aware read
           // rather than returning a snapshot that intentionally ignores them.
           if (!walSidecarsAbsent(database)) {
-            const liveRows = queryChats(database, query, run);
+            const liveRows = readChats(database, options, run);
             onDiagnostic(
               `${path.basename(database)} recovered after Codex recreated its WAL sidecars.`,
             );
