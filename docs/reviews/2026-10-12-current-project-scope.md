@@ -26,3 +26,8 @@ Branch: `codex/current-project-scope` (proposed v0.3.0, not released).
 - The owner's screenshot at 01:15 EDT (`Screenshot 2026-10-21 at 1.15.35 AM.png`) shows **Current project** with the two synthetic Acme chats after the requested **Developer: Reload Window**. The extension-host log records a second Project Chats activation at 01:15:16 EDT with no Project Chats activation or database error. This passes the isolated reload gate; unrelated VS Code renderer warnings were not attributed to Project Chats.
 - A post-reload direct read of the same official-runtime SQLite fixture returned two current-project Acme chats and three chats in All projects (two Acme, one storefront). Installed `extension.js` and `src/history.js` and the rebuilt VSIX payload match the reviewed source byte-for-byte. Normal VS Code remains on v0.2.0.
 - This is a validated local release candidate, not a release of the real-chat reopening path. Synthetic chats do not prove reopening a real chat. No merge, GitHub release, Marketplace publication, dotfiles sync, or other-Mac installation is authorized by this validation.
+
+## Review handoff — October 21
+
+- With the owner's separate approval, the candidate branch was pushed and [draft PR #6](https://github.com/aijoe1/codex-project-history/pull/6) was opened against `main`. The initial PR head was `b6dfdcf16b1342085995ebc4a59340f40dc1478a`; this documentation update advances that head, so CI must be checked against the final pushed commit.
+- Draft review is not approval to merge, tag, publish a GitHub release, install over v0.2.0, or update dotfiles.
