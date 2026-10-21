@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 - Unreleased
+## 0.3.0 - 2026-10-21
 
 - Start active and archived chat searches in the current-project view when a workspace is open.
 - Switch between Current project and All projects in the picker without losing the typed search.

@@ -31,3 +31,9 @@ Branch: `codex/current-project-scope` (proposed v0.3.0, not released).
 
 - With the owner's separate approval, the candidate branch was pushed and [draft PR #6](https://github.com/aijoe1/codex-project-history/pull/6) was opened against `main`. The initial PR head was `b6dfdcf16b1342085995ebc4a59340f40dc1478a`; this documentation update advances that head, so CI must be checked against the final pushed commit.
 - Draft review is not approval to merge, tag, publish a GitHub release, install over v0.2.0, or update dotfiles.
+
+## October 21 release gate
+
+- PR #6 merged to `main` at `cd3b2f354600fd98a3fd45a436114f0f3bf622ba`; post-merge macOS and Ubuntu CI run 39550591999 passed. The merge tree matches the validated product-branch tree.
+- In an isolated VS Code profile using the v0.3.0 VSIX and official Codex dependency, the owner selected one real existing chat and confirmed that its conversation and messages opened. Project Chats activated without a related database or activation error. The agent did not inspect private message text. The test window was closed and its temporary chat/profile copy removed; the original chat and normal v0.2.0 installation were untouched.
+- This replaces the earlier unproved real-chat-reopening gate. The remaining gates are the documentation PR's separate merge approval, a rebuilt VSIX checksum/source check, and public release verification. No tag, release, normal install, dotfiles sync, or Marketplace publication has occurred.
