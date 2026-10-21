@@ -9,7 +9,7 @@ without changing Codex history.
 ## What it does
 
 - Groups local Codex chats by Git repository.
-- Places the current VS Code workspace first.
+- Starts with chats from the current VS Code workspace and offers an **All projects** switch.
 - Shows repository owner, branch, age, and full working directory.
 - Reopens active threads in the official OpenAI Codex editor.
 - Opens archived threads as read-only virtual text documents without restoring them.
@@ -45,14 +45,22 @@ Then run **Developer: Reload Window** in VS Code.
 - Press **Control+Command+H** on macOS.
 - Select **Project Chats** in the status bar.
 
+When a workspace is open, the picker starts with chats belonging to its current project. Select
+**Show all projects** or use the picker button to search across projects; switching views keeps your
+search text. Opening a chat from another project prompts you to confirm the saved working directory.
+Without an open workspace, the picker shows all projects. A Git worktree is treated as part of the
+same project when its recorded repository origin matches the open workspace.
+
 The official Codex status item still opens OpenAI's ungrouped history. **Project Chats** is the
 separate control provided by this extension.
 
 ## Privacy and compatibility
 
 The extension automatically reads existing active and archived user chats created by the VS Code
-Codex extension; no import is needed. It shows up to 300 chats in each picker by default,
-configurable through `codexProjectHistory.maxChats`. It honors `CODEX_SQLITE_HOME`, then
+Codex extension; no import is needed. It shows up to 300 chats in the selected view by default,
+configurable through `codexProjectHistory.maxChats`. The current-project view queries that project
+before applying the limit, so its older chats are not crowded out by recent activity elsewhere.
+It honors `CODEX_SQLITE_HOME`, then
 `CODEX_HOME`, and otherwise checks the newest compatible `~/.codex/state_*.sqlite` database.
 
 Archived transcripts are accepted only when their resolved JSONL path stays inside a configured

@@ -2,7 +2,7 @@
   "name": "codex-project-history",
   "displayName": "Codex Project History",
   "description": "Search active and archived local Codex chats with repository, branch, and working-directory context.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "publisher": "aijoe1",
   "license": "MIT",

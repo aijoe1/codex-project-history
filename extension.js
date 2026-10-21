@@ -85,10 +85,93 @@ function quickPickItems(groups, { archived = false } = {}) {
         description: `${branch} · ${relativeAge(chat.last_used_at)}`,
         detail: chat.cwd,
         chat: { ...chat, project_label: group.label },
+        current: group.current,
       });
     }
   }
   return items;
+}
+
+function chooseChat({ archived, sqliteHome, maxChats, roots, projectKeys }) {
+  const picker = vscode.window.createQuickPick();
+  const canScope = roots.length > 0;
+  let scope = canScope ? "current" : "all";
+
+  function refresh() {
+    const chats = loadChats({
+      codexHome: sqliteHome,
+      maxChats,
+      archived,
+      currentProject: scope === "current" ? { roots, keys: projectKeys } : null,
+      onDiagnostic: logDiagnostic,
+    });
+    const groups = organizeChats(chats, roots, projectKeys);
+    const visibleGroups = scope === "current" ? groups.filter((group) => group.current) : groups;
+    const switchItem = canScope
+      ? [{
+        label: scope === "current" ? "$(globe) Show all projects" : "$(filter) Show current project only",
+        description: scope === "current" ? "Search every project" : "Focus on this workspace",
+        switchScope: true,
+        alwaysShow: true,
+      }]
+      : [];
+    picker.title = `${archived ? "Archived" : "Active"} Codex chats — ${scope === "current" ? "Current project" : "All projects"}`;
+    picker.placeholder = visibleGroups.length
+      ? "Search title, repository, branch, or working directory"
+      : "No chats in this view. Switch to All projects to search elsewhere.";
+    picker.items = [...switchItem, ...quickPickItems(visibleGroups, { archived })];
+    picker.buttons = canScope
+      ? [{
+        iconPath: new vscode.ThemeIcon(scope === "current" ? "globe" : "filter"),
+        tooltip: scope === "current" ? "Show all projects" : "Show current project only",
+      }]
+      : [];
+    return chats.length;
+  }
+
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    function finish(value, error) {
+      if (settled) return;
+      settled = true;
+      picker.dispose();
+      if (error) reject(error);
+      else resolve(value);
+    }
+    function switchScope() {
+      const previous = scope;
+      scope = scope === "current" ? "all" : "current";
+      try {
+        refresh();
+      } catch (error) {
+        scope = previous;
+        finish(null, error);
+      }
+    }
+    picker.matchOnDescription = true;
+    picker.matchOnDetail = true;
+    picker.ignoreFocusOut = true;
+    picker.onDidTriggerButton(switchScope);
+    picker.onDidAccept(() => {
+      const selected = picker.selectedItems[0];
+      if (selected?.switchScope) switchScope();
+      else if (selected?.chat) finish(selected);
+    });
+    picker.onDidHide(() => finish(null));
+    try {
+      const count = refresh();
+      if (!canScope && count === 0) {
+        finish(null);
+        void vscode.window.showInformationMessage(
+          `No ${archived ? "archived" : "active"} VS Code Codex chats were found.`,
+        );
+      } else {
+        picker.show();
+      }
+    } catch (error) {
+      finish(null, error);
+    }
+  });
 }
 
 async function openCodexChat(chat) {
@@ -161,13 +244,16 @@ async function pickHistory({ archived = false, restore = false } = {}) {
   const config = vscode.workspace.getConfiguration("codexProjectHistory");
   const maxChats = config.get("maxChats", 300);
   const sqliteHome = codexSqliteHome();
-  let chats;
+  const roots = workspaceRoots();
+  const projectKeys = workspaceProjectKeys(roots);
+  let picked;
   try {
-    chats = loadChats({
-      codexHome: sqliteHome,
+    picked = await chooseChat({
+      sqliteHome,
       maxChats,
       archived,
-      onDiagnostic: logDiagnostic,
+      roots,
+      projectKeys,
     });
   } catch (error) {
     logDiagnostic(`History read failed: ${error.message}`);
@@ -179,24 +265,16 @@ async function pickHistory({ archived = false, restore = false } = {}) {
     return;
   }
 
-  if (chats.length === 0) {
-    const state = archived ? "archived" : "active";
-    void vscode.window.showInformationMessage(`No ${state} VS Code Codex chats were found.`);
-    return;
-  }
-
-  const roots = workspaceRoots();
-  const picked = await vscode.window.showQuickPick(
-    quickPickItems(organizeChats(chats, roots, workspaceProjectKeys(roots)), { archived }),
-    {
-      title: archived ? "Archived Codex chats by project" : "Active Codex chats by project",
-      placeHolder: "Search title, repository, branch, or working directory",
-      matchOnDescription: true,
-      matchOnDetail: true,
-      ignoreFocusOut: true,
-    },
-  );
   if (!picked || !picked.chat) return;
+
+  if (roots.length > 0 && !picked.current) {
+    const confirmation = await vscode.window.showWarningMessage(
+      `This chat belongs to ${picked.chat.project_label}, outside the current workspace. Open it here?`,
+      { modal: true, detail: `Saved working directory: ${picked.chat.cwd}` },
+      "Open chat",
+    );
+    if (confirmation !== "Open chat") return;
+  }
 
   if (restore) {
     await restoreArchivedChat(picked.chat, openai);

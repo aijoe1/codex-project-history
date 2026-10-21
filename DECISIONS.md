@@ -242,3 +242,11 @@ can still wait indefinitely if a child ignores that signal; forced termination b
 **Impact:** Existing public history is unaffected because this repository has not been published.
 The calls remain synchronous and can pause the extension host for the configured duration; multiple
 lookups can accumulate. A fully asynchronous implementation remains a future responsiveness improvement.
+
+## 2026-10-12 - Search current workspace first, retain explicit cross-project access `PROPOSED`
+
+**What:** In the next Project Chats release, start search in a Current project view when a VS Code workspace is open. Keep an explicit All projects switch and require confirmation before opening a chat outside the workspace. Apply the project filter in SQLite before the recent-chat limit, including equivalent Git origins across worktrees.
+
+**Why:** Merely placing the current project at the top still leaves an ambiguous global search, and applying the 300-chat cap first can hide older relevant chats entirely. Cross-project access remains useful, but it should be deliberate.
+
+**Impact:** The native picker changes while the database stays read-only. This decision remains proposed until the actual isolated picker and reload are visually verified; tests, live metadata counts, and extension-host activation alone do not prove the interface.

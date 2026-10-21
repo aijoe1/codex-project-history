@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 - Unreleased
+
+- Start active and archived chat searches in the current-project view when a workspace is open.
+- Switch between Current project and All projects in the picker without losing the typed search.
+- Read current-project history independently of the global recent-chat limit, including matching
+  Git worktrees and older chats.
+- Ask for confirmation before opening a chat from another project in the current VS Code window.
+
 ## 0.2.0 - 2026-09-12
 
 - Add a project-aware archived-chat picker and native read-only transcript viewer.
