@@ -243,10 +243,23 @@ can still wait indefinitely if a child ignores that signal; forced termination b
 The calls remain synchronous and can pause the extension host for the configured duration; multiple
 lookups can accumulate. A fully asynchronous implementation remains a future responsiveness improvement.
 
-## 2026-10-12 - Search current workspace first, retain explicit cross-project access `PROPOSED`
+## 2026-10-12 - Search current workspace first, retain explicit cross-project access `ACTIVE`
 
 **What:** In the next Project Chats release, start search in a Current project view when a VS Code workspace is open. Keep an explicit All projects switch and require confirmation before opening a chat outside the workspace. Apply the project filter in SQLite before the recent-chat limit, including equivalent Git origins across worktrees.
 
 **Why:** Merely placing the current project at the top still leaves an ambiguous global search, and applying the 300-chat cap first can hide older relevant chats entirely. Cross-project access remains useful, but it should be deliberate.
 
-**Impact:** The native picker changes while the database stays read-only. This decision remains proposed until the actual isolated picker and reload are visually verified; tests, live metadata counts, and extension-host activation alone do not prove the interface.
+**Impact:** The native picker changes while the database stays read-only. The owner visually verified the isolated picker and post-reload current-project view on 2026-10-21, then confirmed that a real chat opened with its messages. The latter is owner-observed proof, not direct agent inspection of private content.
+
+## 2026-10-21 - Release v0.3.0 through GitHub before other distribution `ACTIVE`
+
+**What:** After the documentation-only release record is separately approved and merged, tag
+the verified `main` commit and publish its VSIX as a GitHub release. Do not install it in normal
+VS Code, sync the private dotfiles vendor, or publish to Marketplace as part of this release.
+
+**Why:** Isolated picker/reload checks and owner-observed real-chat reopening support a public,
+versioned download, while local rollout and other distribution channels have distinct effects
+and need their own decisions.
+
+**Impact:** Publication requires a rebuilt artifact checksum and a post-publication download
+check. The GitHub release approval does not waive separate approval to merge the record PR.
